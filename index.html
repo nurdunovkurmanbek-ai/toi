@@ -348,7 +348,9 @@
     document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
   })();
 
-  var saved='ru'; try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){}
+  var urlLang=''; try{ urlLang=(new URLSearchParams(location.search).get('lang')||'').toLowerCase(); }catch(e){}
+  var saved = (urlLang==='ky'||urlLang==='ru') ? urlLang : 'ru';
+  if(!(urlLang==='ky'||urlLang==='ru')){ try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){} }
   applyLang(saved);
 </script>
 </body>

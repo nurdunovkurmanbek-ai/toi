@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#e7e5e1">
+<meta name="robots" content="noindex">
+<title>Чакыруу шилтемесин түзүү</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e7e5e1; --card:#fdfdfb; --ink:#4c4840; --ink2:#8a8477;
+    --gold:#bd9558; --gold2:#9c7f45; --olive:#7c8767; --wa:#25a35a;
+    --line:rgba(150,130,90,.32); --serif:'Cormorant Garamond',Georgia,serif; --script:'Marck Script',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);color:var(--ink);line-height:1.55;
+    background:linear-gradient(180deg,var(--bg),#e1dcd2);min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;padding:clamp(1.5rem,6vw,3.5rem) 1rem;-webkit-font-smoothing:antialiased}
+  .card{width:min(100%,480px);background:var(--card);border:1px solid var(--line);border-radius:4px;
+    box-shadow:0 22px 50px -32px rgba(70,55,25,.5);padding:clamp(1.75rem,7vw,2.75rem)}
+  h1{font-family:var(--script);font-weight:400;color:var(--gold2);font-size:clamp(2rem,9vw,2.7rem);text-align:center;line-height:1.05}
+  .sub{text-align:center;color:var(--ink2);font-size:.95rem;margin:.3rem 0 1.5rem;letter-spacing:.02em}
+  label{display:block;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--ink2);margin:0 0 .5rem}
+  input[type=text]{width:100%;font-family:var(--serif);font-size:1.25rem;color:var(--ink);background:#fbf8f2;
+    border:1px solid var(--line);border-radius:4px;padding:.8rem 1rem}
+  input[type=text]:focus{outline:2px solid var(--gold);outline-offset:1px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:.9rem}
+  .seg button{border:0;background:transparent;cursor:pointer;font-family:var(--serif);font-size:.82rem;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);padding:.5rem 1.1rem}
+  .seg button.on{color:#fff;background:var(--olive)}
+
+  .out{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.4rem}
+  .preview{background:#f6f2ea;border:1px dashed var(--line);border-radius:6px;padding:1rem;text-align:center;margin-bottom:1.1rem}
+  .preview .h{text-transform:uppercase;letter-spacing:.2em;font-size:.66rem;color:var(--ink2)}
+  .preview .g{font-family:var(--script);color:var(--gold2);font-size:clamp(1.6rem,8vw,2.2rem);line-height:1.1;margin:.15rem 0}
+  .preview .t{font-size:.92rem;color:var(--ink);letter-spacing:.01em}
+  .linkbox{display:flex;align-items:center;gap:.5rem;background:#f2eee6;border:1px solid var(--line);border-radius:6px;padding:.6rem .75rem;margin-bottom:.9rem}
+  .linkbox input{flex:1;border:0;background:transparent;font-family:var(--serif);font-size:.9rem;color:var(--ink2);min-width:0}
+  .linkbox input:focus{outline:none}
+  .btns{display:flex;flex-direction:column;gap:.6rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;text-decoration:none;cursor:pointer;
+    min-height:52px;border-radius:5px;font-family:var(--serif);font-size:.86rem;text-transform:uppercase;letter-spacing:.12em;border:1px solid transparent}
+  .btn svg{width:18px;height:18px}
+  .btn-wa{background:var(--wa);color:#fff}
+  .btn-copy{background:var(--gold);color:#fff}
+  .btn-open{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn:active{transform:translateY(1px)}
+  .hint{margin-top:1.2rem;font-size:.82rem;color:var(--ink2);text-align:center;line-height:1.6}
+  .toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--ink);color:#fff;padding:.65rem 1.2rem;border-radius:999px;font-size:.85rem;letter-spacing:.03em;
+    transition:opacity .25s ease,transform .25s ease;pointer-events:none;z-index:10}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Чакыруу шилтемеси</h1>
+    <p class="sub">Конактын атын жазыңыз — даяр шилтеме чыгат</p>
+
+    <label for="name">Конактын аты</label>
+    <input type="text" id="name" placeholder="Мисалы: Мухаммедазиз Айбийке" autocomplete="off" autofocus>
+
+    <div>
+      <label style="margin-top:1.1rem">Тил</label>
+      <div class="seg" id="seg">
+        <button type="button" data-l="ky" class="on">Кыргызча</button>
+        <button type="button" data-l="ru">Русский</button>
+      </div>
+    </div>
+
+    <div class="out">
+      <div class="preview">
+        <div class="h" id="pv-hello">УРМАТТУУ</div>
+        <div class="g" id="pv-name">коноктор</div>
+        <div class="t" id="pv-text">сиздерди үйлөнүү тоюбузга чакырабыз!</div>
+      </div>
+
+      <div class="linkbox"><input type="text" id="link" readonly></div>
+
+      <div class="btns">
+        <a class="btn btn-wa" id="wa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 5-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.2 14.8l-.3-.2-2.9.8.8-2.9-.2-.3A8 8 0 0112 4zm4.5 9.7c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.6.8-.8 1c-.1.1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.8.8-1 1.9-.6 3.1a11 11 0 004.4 4.4c1.6.8 2.3.7 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
+          WhatsApp менен жиберүү
+        </a>
+        <button class="btn btn-copy" id="copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+          Шилтемени көчүрүү
+        </button>
+        <a class="btn btn-open" id="open" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          Ачып көрүү
+        </a>
+      </div>
+    </div>
+
+    <p class="hint">Ар бир конок үчүн атты алмаштырып, кайра жибере бериңиз.<br>Ат бош болсо — «Урматтуу коноктор» деп жалпы чыгат.</p>
+  </div>
+
+  <div class="toast" id="toast">Көчүрүлдү ✓</div>
+
+<script>
+  var BASE="https://nurdunovkurmanbek-ai.github.io/toi/";
+  var T={
+    ky:{hello:"УРМАТТУУ",fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!"},
+    ru:{hello:"ДОРОГИЕ",fallback:"гости",text:"приглашаем вас на нашу свадьбу!"}
+  };
+  var lang='ky';
+  var nameEl=document.getElementById('name'),linkEl=document.getElementById('link'),
+      wa=document.getElementById('wa'),open=document.getElementById('open'),
+      pvHello=document.getElementById('pv-hello'),pvName=document.getElementById('pv-name'),pvText=document.getElementById('pv-text');
+
+  function render(){
+    var name=nameEl.value.trim();
+    var t=T[lang];
+    var url=BASE+"?lang="+lang+(name?("&to="+encodeURIComponent(name)):"");
+    linkEl.value=url;
+    open.href=url;
+    pvHello.textContent=t.hello;
+    pvName.textContent=name||t.fallback;
+    pvText.textContent=t.text;
+    var msg=(name?("Урматтуу "+name+"! "):"")+"Сиздерди тоюбузга чакырабыз 💛\n"+url;
+    wa.href="https://wa.me/?text="+encodeURIComponent(msg);
+  }
+  nameEl.addEventListener('input',render);
+
+  document.getElementById('seg').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    lang=b.getAttribute('data-l');
+    Array.prototype.forEach.call(this.children,function(x){ x.classList.toggle('on',x===b); });
+    render();
+  });
+
+  var toast=document.getElementById('toast');
+  function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1600); }
+  document.getElementById('copy').addEventListener('click',function(){
+    var v=linkEl.value;
+    function ok(){ showToast("Көчүрүлдү ✓"); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(v).then(ok).catch(function(){ linkEl.select();document.execCommand('copy');ok(); }); }
+    else{ linkEl.select();document.execCommand('copy');ok(); }
+  });
+
+  render();
+</script>
+</body>
+</html>
