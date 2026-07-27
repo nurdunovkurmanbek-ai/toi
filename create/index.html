@@ -53,13 +53,13 @@
 </head>
 <body>
   <div class="card">
-    <h1>Чакыруу шилтемеси</h1>
-    <p class="sub">Коноктун атын жазыңыз — даяр шилтеме чыгат</p>
+    <h1 id="ttl">Чакыруу шилтемеси</h1>
+    <p class="sub" id="sub">Коноктун атын жазыңыз — даяр шилтеме чыгат</p>
 
-    <label for="name">Коноктун аты</label>
-    <input type="text" id="name" placeholder="Мисалы: Мухаммедазиз Айбийке" autocomplete="off" autofocus>
+    <label for="name" id="lb-name">Коноктун аты</label>
+    <input type="text" id="name" autocomplete="off" autofocus>
 
-    <label style="margin-top:1.1rem">Тил</label>
+    <label id="lb-lang" style="margin-top:1.1rem">Тил</label>
     <div class="seg" id="seg">
       <button type="button" data-l="ky" class="on">Кыргызча</button>
       <button type="button" data-l="ru">Русский</button>
@@ -75,61 +75,75 @@
       <div class="btns">
         <a class="btn btn-wa" id="wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 5-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.2 14.8l-.3-.2-2.9.8.8-2.9-.2-.3A8 8 0 0112 4zm4.5 9.7c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.6.8-.8 1c-.1.1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.8.8-1 1.9-.6 3.1a11 11 0 004.4 4.4c1.6.8 2.3.7 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
-          WhatsApp менен жиберүү
+          <span id="lb-wa">WhatsApp менен жиберүү</span>
         </a>
         <button class="btn btn-copy" id="copy" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
-          Шилтемени көчүрүү
+          <span id="lb-copy">Шилтемени көчүрүү</span>
         </button>
         <a class="btn btn-open" id="open" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-          Ачып көрүү
+          <span id="lb-open">Ачып көрүү</span>
         </a>
       </div>
     </div>
   </div>
 
-  <div class="toast" id="toast">Көчүрүлдү ✓</div>
+  <div class="toast" id="toast"></div>
 
 <script>
   var BASE="https://nurdunovkurmanbek-ai.github.io/toi/";
-  var T={
-    ky:{hello:"УРМАТТУУ",fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!"},
-    ru:{hello:"ДОРОГИЕ",fallback:"гости",text:"приглашаем вас на нашу свадьбу!"}
+  var UI={
+    ky:{title:"Чакыруу шилтемеси",sub:"Коноктун атын жазыңыз — даяр шилтеме чыгат",
+        nameLabel:"Коноктун аты",placeholder:"Мисалы: Мухаммедазиз Айбийке",langLabel:"Тил",
+        wa:"WhatsApp менен жиберүү",copy:"Шилтемени көчүрүү",openb:"Ачып көрүү",copied:"Көчүрүлдү ✓",
+        hello:"УРМАТТУУ",fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!",
+        waMsgHello:"Урматтуу ",waMsg:"Сиздерди тоюбузга чакырабыз 💛"},
+    ru:{title:"Ссылка-приглашение",sub:"Впишите имя гостя — получите готовую ссылку",
+        nameLabel:"Имя гостя",placeholder:"Например: Мухаммедазиз Айбийке",langLabel:"Язык",
+        wa:"Отправить в WhatsApp",copy:"Скопировать ссылку",openb:"Открыть",copied:"Скопировано ✓",
+        hello:"ДОРОГИЕ",fallback:"гости",text:"приглашаем вас на нашу свадьбу!",
+        waMsgHello:"Дорогие ",waMsg:"Приглашаем вас на нашу свадьбу 💛"}
   };
   var lang="ky", currentUrl=BASE;
-  var nameEl=document.getElementById('name'),
-      waEl=document.getElementById('wa'), openEl=document.getElementById('open'),
-      pvHello=document.getElementById('pv-hello'), pvName=document.getElementById('pv-name'), pvText=document.getElementById('pv-text');
+  var $=function(id){return document.getElementById(id);};
+  var nameEl=$('name'), waEl=$('wa'), openEl=$('open'),
+      pvHello=$('pv-hello'), pvName=$('pv-name'), pvText=$('pv-text');
 
   function render(){
-    var name=nameEl.value.trim(), t=T[lang];
-    currentUrl = BASE+"?lang="+lang+(name ? "&to="+encodeURIComponent(name) : "");
-    openEl.href = currentUrl;
-    pvHello.textContent = t.hello;
-    pvName.textContent  = name || t.fallback;
-    pvText.textContent  = t.text;
-    var msg=(name ? ("Урматтуу "+name+"! ") : "")+"Сиздерди тоюбузга чакырабыз 💛\n"+currentUrl;
-    waEl.href = "https://wa.me/?text="+encodeURIComponent(msg);
+    var name=nameEl.value.trim(), t=UI[lang];
+    // интерфейс
+    document.documentElement.lang=lang;
+    $('ttl').textContent=t.title; $('sub').textContent=t.sub;
+    $('lb-name').textContent=t.nameLabel; nameEl.placeholder=t.placeholder;
+    $('lb-lang').textContent=t.langLabel;
+    $('lb-wa').textContent=t.wa; $('lb-copy').textContent=t.copy; $('lb-open').textContent=t.openb;
+    // превью
+    pvHello.textContent=t.hello; pvName.textContent=name||t.fallback; pvText.textContent=t.text;
+    // ссылки
+    currentUrl=BASE+"?lang="+lang+(name ? "&to="+encodeURIComponent(name) : "");
+    openEl.href=currentUrl;
+    var msg=(name ? (t.waMsgHello+name+"! ") : "")+t.waMsg+"\n"+currentUrl;
+    waEl.href="https://wa.me/?text="+encodeURIComponent(msg);
   }
   nameEl.addEventListener('input', render);
 
-  var segBtns = document.querySelectorAll('#seg button');
+  var segBtns=document.querySelectorAll('#seg button');
   segBtns.forEach(function(b){
     b.addEventListener('click', function(){
-      lang = b.getAttribute('data-l');
+      lang=b.getAttribute('data-l');
       segBtns.forEach(function(x){ x.classList.toggle('on', x===b); });
       render();
     });
   });
 
-  var toast=document.getElementById('toast');
+  var toast=$('toast');
   function showToast(m){ toast.textContent=m; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1600); }
-  document.getElementById('copy').addEventListener('click', function(){
-    function ok(){ showToast("Көчүрүлдү ✓"); }
-    function fallbackCopy(){ var i=document.createElement('input'); i.value=currentUrl; document.body.appendChild(i); i.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(i); ok(); }
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(currentUrl).then(ok).catch(fallbackCopy); }
-    else fallbackCopy();
+  $('copy').addEventListener('click', function(){
+    function ok(){ showToast(UI[lang].copied); }
+    function fb(){ var i=document.createElement('input'); i.value=currentUrl; document.body.appendChild(i); i.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(i); ok(); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(currentUrl).then(ok).catch(fb); }
+    else fb();
   });
 
   render();
