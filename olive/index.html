@@ -77,11 +77,60 @@
   footer .fd{letter-spacing:.24em;font-size:.76rem;margin-top:.3rem;color:var(--ink2)}
   .rise{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
   .rise.vis{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{opacity:1;transform:none;transition:none}}
+
+  /* ─── heart cover ─── */
+  body.locked{overflow:hidden;height:100vh}
+  .seal{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;
+    background:radial-gradient(130% 100% at 50% 30%,#f1eee6,#e9e5dc 60%,#e4dfd5);transition:opacity .9s ease,visibility .9s ease}
+  .seal.gone{opacity:0;visibility:hidden;pointer-events:none}
+  .chain{width:64px;color:#c3b48a;margin-bottom:-.4rem}
+  .heart{position:relative;width:clamp(150px,44vw,190px);aspect-ratio:1/.94;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;filter:drop-shadow(0 10px 18px rgba(110,90,40,.32))}
+  .heart .half{position:absolute;top:0;height:100%;width:50%;overflow:hidden;transition:transform 1s cubic-bezier(.6,.02,.2,1),opacity 1s ease}
+  .heart .half svg{position:absolute;top:0;width:clamp(150px,44vw,190px);height:100%}
+  .heart .h-l{left:0} .heart .h-l svg{left:0}
+  .heart .h-r{right:0} .heart .h-r svg{right:0}
+  .heart .label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--script);color:#fdf6e6;font-size:clamp(1rem,4.6vw,1.25rem);line-height:1.15;
+    text-shadow:0 1px 3px rgba(90,70,20,.5);transition:opacity .4s ease;pointer-events:none;padding-top:6%}
+  .heart.pulse{animation:beat 1.7s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.06)}24%{transform:scale(1)}36%{transform:scale(1.04)}}
+  .heart.open{animation:none;cursor:default}
+  .heart.open .h-l{transform:translateX(-64%) rotate(-40deg);opacity:0}
+  .heart.open .h-r{transform:translateX(64%) rotate(40deg);opacity:0}
+  .heart.open .label{opacity:0}
+  .seal .hint{text-transform:uppercase;letter-spacing:.24em;font-size:.66rem;color:var(--ink2)}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{opacity:1;transform:none;transition:none}.heart.pulse{animation:none}}
   @media (max-width:380px){ .content{padding-right:34%} }
 </style>
 </head>
-<body>
+<body class="locked">
+  <div class="seal" id="seal">
+    <svg class="chain" viewBox="0 0 60 150" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M30 0 C30 30 30 55 30 78" stroke-dasharray="1 6" stroke-linecap="round"/><circle cx="30" cy="86" r="8"/>
+    </svg>
+    <div class="heart pulse" id="heart" role="button" tabindex="0" aria-label="Открыть приглашение">
+      <div class="half h-l">
+        <svg viewBox="0 0 190 178" aria-hidden="true">
+          <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#d3bd85"/><stop offset=".5" stop-color="#b39a5c"/><stop offset="1" stop-color="#8f7639"/>
+          </linearGradient></defs>
+          <path d="M95 165 C88 158 20 108 20 60 C20 34 38 18 60 18 C76 18 88 28 95 44 C102 28 114 18 130 18 C152 18 170 34 170 60 C170 108 102 158 95 165 Z" fill="url(#hg)"/>
+          <path d="M95 66 C90 60 84 60 80 66 C86 68 92 70 95 66 Z M95 66 C100 60 106 60 110 66 C104 68 98 70 95 66 Z M95 82 L95 60" stroke="#6f5a26" stroke-width="1.4" fill="none" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="half h-r">
+        <svg viewBox="0 0 190 178" aria-hidden="true">
+          <path d="M95 165 C88 158 20 108 20 60 C20 34 38 18 60 18 C76 18 88 28 95 44 C102 28 114 18 130 18 C152 18 170 34 170 60 C170 108 102 158 95 165 Z" fill="url(#hg)"/>
+          <path d="M95 66 C90 60 84 60 80 66 C86 68 92 70 95 66 Z M95 66 C100 60 106 60 110 66 C104 68 98 70 95 66 Z M95 82 L95 60" stroke="#6f5a26" stroke-width="1.4" fill="none" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="label" data-i18n="sealLabel">Нажми<br>на меня</div>
+    </div>
+    <div class="hint" data-i18n="sealHint">Нажмите на сердце</div>
+  </div>
+
   <div class="lang" role="group" aria-label="Тил / Язык">
     <button id="ky" type="button">Кыр</button><button id="ru" type="button">Рус</button>
   </div>
@@ -204,15 +253,23 @@
   var WD={ru:["ВОСКРЕСЕНЬЕ","ПОНЕДЕЛЬНИК","ВТОРНИК","СРЕДА","ЧЕТВЕРГ","ПЯТНИЦА","СУББОТА"],
           ky:["ЖЕКШЕМБИ","ДҮЙШӨМБҮ","ШЕЙШЕМБИ","ШАРШЕМБИ","БЕЙШЕМБИ","ЖУМА","ИШЕМБИ"]};
   var I18N={
-    ru:{guests:"ПРИГЛАШЕНИЕ НА НАШУ СВАДЬБУ",names:"Акназар & Медина",glad:"Разделите с нами радость этого особенного дня!",month:"АВГУСТ",startlabel:"НАЧАЛО В",venue:"Ресторан «Меридиана»",place:"с. Мырза-Аке",closing:"БУДЕМ СЧАСТЛИВЫ ВИДЕТЬ ВАС НА НАШЕМ ПРАЗДНИКЕ!",cdTitle:"До торжества",uDays:"дней",uHrs:"часов",uMin:"минут",uSec:"секунд",locTitle:"Как добраться",venue2:"Ресторан «Меридиана»",place2:"с. Мырза-Аке",mapBtn:"Открыть в картах"},
-    ky:{guests:"БИЗДИН ТОЙГО ЧАКЫРУУ",names:"Акназар & Медина",glad:"Ушул өзгөчө күндүн кубанычын биз менен бөлүшүңүз!",month:"АВГУСТ",startlabel:"БАШТАЛЫШЫ",venue:"«Меридиана» ресторан",place:"Мырза-Аке айылы",closing:"СИЗДЕРДИ ТОЙУБУЗДА КӨРГӨНГӨ БАКТЫЛУУ БОЛОБУЗ!",cdTitle:"Салтанатка чейин",uDays:"күн",uHrs:"саат",uMin:"мүнөт",uSec:"секунд",locTitle:"Кантип жетесиз",venue2:"«Меридиана» ресторан",place2:"Мырза-Аке айылы",mapBtn:"Картадан ачуу"}
+    ru:{guests:"ПРИГЛАШЕНИЕ<br>НА НАШУ СВАДЬБУ",names:"Акназар & Медина",glad:"Разделите с нами радость этого особенного дня!",month:"АВГУСТ",startlabel:"НАЧАЛО В",venue:"Ресторан «Меридиана»",place:"с. Мырза-Аке",closing:"БУДЕМ СЧАСТЛИВЫ ВИДЕТЬ ВАС НА НАШЕМ ПРАЗДНИКЕ!",cdTitle:"До торжества",uDays:"дней",uHrs:"часов",uMin:"минут",uSec:"секунд",locTitle:"Как добраться",venue2:"Ресторан «Меридиана»",place2:"с. Мырза-Аке",mapBtn:"Открыть в картах",sealLabel:"Нажми<br>на меня",sealHint:"Нажмите на сердце"},
+    ky:{guests:"БИЗДИН<br>ТОЙГО ЧАКЫРУУ",names:"Акназар & Медина",glad:"Ушул өзгөчө күндүн кубанычын биз менен бөлүшүңүз!",month:"АВГУСТ",startlabel:"БАШТАЛЫШЫ",venue:"«Меридиана» ресторан",place:"Мырза-Аке айылы",closing:"СИЗДЕРДИ ТОЙУБУЗДА КӨРГӨНГӨ БАКТЫЛУУ БОЛОБУЗ!",cdTitle:"Салтанатка чейин",uDays:"күн",uHrs:"саат",uMin:"мүнөт",uSec:"секунд",locTitle:"Кантип жетесиз",venue2:"«Меридиана» ресторан",place2:"Мырза-Аке айылы",mapBtn:"Картадан ачуу",sealLabel:"Басып<br>ачыңыз",sealHint:"Жүрөктү басыңыз"}
   };
   function applyLang(l){var t=I18N[l];document.documentElement.lang=l;
-    document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(t[k]!=null)e.textContent=t[k];});
+    document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(t[k]!=null){ if(t[k].indexOf('<')>=0) e.innerHTML=t[k]; else e.textContent=t[k]; }});
     document.getElementById('wd').textContent=WD[l][WEDDING.getDay()];
     ky.classList.toggle('on',l==='ky');ru.classList.toggle('on',l==='ru');try{localStorage.setItem('lang',l)}catch(e){}}
   var ky=document.getElementById('ky'),ru=document.getElementById('ru');
   ky.onclick=function(){applyLang('ky')};ru.onclick=function(){applyLang('ru')};
+
+  (function(){var seal=document.getElementById('seal'),heart=document.getElementById('heart'),opened=false;
+    function open(){if(opened)return;opened=true;heart.classList.add('open');heart.classList.remove('pulse');
+      setTimeout(function(){seal.classList.add('gone');document.body.classList.remove('locked');},850);}
+    heart.addEventListener('click',open);
+    heart.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  })();
+
   (function(){var t=WEDDING.getTime();var d=document.getElementById('d'),h=document.getElementById('h'),m=document.getElementById('m'),s=document.getElementById('s');function p(n){return(n<10?'0':'')+n}
     function tick(){var f=t-Date.now();if(f<=0){document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Marck Script'"+',cursive;font-size:1.7rem;color:#8f7639">&#9829;</div>';return}
       var x=Math.floor(f/1000);d.textContent=Math.floor(x/86400);h.textContent=p(Math.floor(x%86400/3600));m.textContent=p(Math.floor(x%3600/60));s.textContent=p(x%60);setTimeout(tick,1000)}tick();})();
