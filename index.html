@@ -399,32 +399,18 @@
     </div>
   </section>
 
-  <!-- ══ RSVP ══ -->
+  <!-- ══ ЗАКЛЮЧЕНИЕ ══ -->
   <section>
     <div class="wrap frame rise">
-      <div class="eyebrow">Подтвердите присутствие</div>
-      <h2 class="title">Ваш ответ</h2>
-      <p class="lead muted">Пожалуйста, заполните анкету, чтобы мы знали, что вы придёте.</p>
-      <form id="rsvp">
-        <label class="fld">Ваше имя и фамилия
-          <input type="text" id="guest" placeholder="Например: Айбек Осмонов" required>
-        </label>
-        <div class="fld">Сможете ли вы присутствовать?
-          <div class="opts">
-            <label class="opt"><input type="radio" name="go" value="Обязательно приду" checked> Обязательно приду</label>
-            <label class="opt"><input type="radio" name="go" value="К сожалению, не смогу"> К сожалению, не смогу</label>
-          </div>
-        </div>
-        <div class="fld">Сколько вас будет?
-          <div class="stepper">
-            <button type="button" id="minus" aria-label="Меньше">−</button>
-            <span class="cnt" id="cnt">1</span>
-            <button type="button" id="plus" aria-label="Больше">+</button>
-          </div>
-        </div>
-        <button type="submit" class="send">Отправить ответ</button>
-      </form>
-      <p class="note" id="rsvpnote">Ответ откроется в WhatsApp — просто нажмите «Отправить».</p>
+      <div class="eyebrow">С любовью</div>
+      <h2 class="title">Ждём вас!</h2>
+      <p class="lead">
+        Будем счастливы разделить этот особенный день вместе с вами.
+        До встречи на нашем торжестве!
+      </p>
+      <div class="rule" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
+      </div>
     </div>
   </section>
 
@@ -437,7 +423,6 @@
 <script>
   // ───── легко менять ─────
   var WEDDING  = new Date(2026, 7, 22, 17, 0, 0);  // 22 августа 2026, 17:00
-  var WHATSAPP = "";   // напр. "996700123456" — впишите номер, чтобы ответы приходили в WhatsApp
 
   // ───── открытие сердца ─────
   (function(){
@@ -484,21 +469,6 @@
       if(c%7===0){ body.appendChild(row); row=document.createElement('tr'); }
     }
     if(c%7!==0) body.appendChild(row);
-  })();
-
-  // ───── RSVP ─────
-  (function(){
-    var cnt=1, el=document.getElementById('cnt');
-    document.getElementById('plus').onclick=function(){ cnt=Math.min(20,cnt+1); el.textContent=cnt; };
-    document.getElementById('minus').onclick=function(){ cnt=Math.max(1,cnt-1); el.textContent=cnt; };
-    document.getElementById('rsvp').addEventListener('submit', function(e){
-      e.preventDefault();
-      var name=document.getElementById('guest').value.trim()||'Гость';
-      var go=document.querySelector('input[name=go]:checked').value;
-      var msg='Свадьба Акназар & Медина\n\nИмя: '+name+'\nОтвет: '+go+'\nКоличество гостей: '+cnt;
-      if(WHATSAPP){ window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank'); }
-      else{ document.getElementById('rsvpnote').innerHTML='Спасибо, <b>'+name+'</b>! Ваш ответ принят.<br><span class="muted">Чтобы ответы приходили в WhatsApp — впишите номер в настройках сайта.</span>'; }
-    });
   })();
 
   // ───── появление при прокрутке ─────
