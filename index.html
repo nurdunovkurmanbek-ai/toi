@@ -96,6 +96,9 @@
   .cd .n{ font-size:var(--fs-md); color:var(--gold); font-variant-numeric:tabular-nums; line-height:1; }
   .cd .l{ text-transform:uppercase; letter-spacing:.08em; font-size:var(--fs-sm); color:var(--muted); margin-top:.4rem; }
 
+  .loc-venue{ font-size:var(--fs-md); color:var(--gold); }
+  .loc-place{ font-size:var(--fs-sm); color:var(--muted); text-transform:uppercase; letter-spacing:.14em; margin-top:.2rem; }
+
   footer{ text-align:center; padding:2.25rem 1.15rem 3.25rem; }
   footer .fn{ font-family:var(--script); font-size:var(--fs-md); color:var(--gold); }
   footer .fd{ letter-spacing:.24em; font-size:var(--fs-sm); margin-top:.3rem; color:var(--muted); }
@@ -220,6 +223,18 @@
     </div>
   </section>
 
+  <section>
+    <div class="panel rise">
+      <h2 class="title" data-i18n="locTitle">Кантип жетесиз</h2>
+      <div class="loc-venue" data-i18n="venue">«Меридиана» ресторан</div>
+      <div class="loc-place" data-i18n="place">Мырза-Аке айылы</div>
+      <a class="btn" href="https://go.2gis.com/PXb93" target="_blank" rel="noopener" data-i18n="addressBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Дарек
+      </a>
+    </div>
+  </section>
+
   <footer>
     <div class="fn">Акназар &amp; Медина</div>
     <div class="fd">22.08.2026</div>
@@ -236,6 +251,7 @@
       date:"22 08 2026", names:"Акназар & Медина",
       startlabel:"Начало торжества", venue:"Ресторан «Меридиана»", place:"с. Мырза-Аке",
       addressBtn:"Адрес", signWith:"С уважением,", parents:"Муратбек, Гульжамал",
+      locTitle:"Как добраться",
       cdTitle:"До торжества", month:"Август 2026",
       uDays:"дней", uHrs:"часов", uMin:"минут", uSec:"секунд",
       wd:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
@@ -246,6 +262,7 @@
       date:"22 08 2026", names:"Акназар & Медина",
       startlabel:"Салтанаттын башталышы", venue:"«Меридиана» ресторан", place:"Мырза-Аке айылы",
       addressBtn:"Дарек", signWith:"Сиздерди урматтоо менен,", parents:"Муратбек, Гүлжамал",
+      locTitle:"Кантип жетесиз",
       cdTitle:"Салтанатка чейин", month:"2026-жыл, август",
       uDays:"күн", uHrs:"саат", uMin:"мүнөт", uSec:"секунд",
       wd:["Дш","Шш","Шр","Бш","Жм","Иш","Жк"]
