@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Приглашение на свадьбу Акназара и Медины — 22 августа 2026, ресторан «Меридиана», с. Мырза-Аке">
+<meta property="og:title" content="Акназар & Медина — Приглашение на свадьбу">
+<meta property="og:description" content="22 августа 2026 · 17:00 · Ресторан «Меридиана», с. Мырза-Аке">
+<meta property="og:type" content="website">
+<title>Акназар & Медина — Приглашение на свадьбу</title>
+<style>
+  :root {
+    --ground:      #211f1a;
+    --ground-2:    #2b2921;
+    --paper:       #f5f2e9;
+    --paper-2:     #efebde;
+    --ink:         #44483a;
+    --ink-soft:    #6d715e;
+    --olive:       #6e7355;
+    --olive-deep:  #545a3f;
+    --gold:        #b0904c;
+    --gold-deep:   #957a3c;
+    --line:        rgba(84, 90, 63, 0.28);
+
+    --display: 'Cormorant Garamond', 'Cormorant', 'Didot', 'Bodoni 72',
+               'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    --body:    'Palatino Linotype', 'Book Antiqua', 'Cambria', Georgia, serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-height: 100vh;
+    font-family: var(--body);
+    color: var(--ink);
+    background:
+      radial-gradient(120% 80% at 50% -10%, var(--ground-2), var(--ground) 60%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    padding: clamp(1.5rem, 5vw, 4rem) 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  /* ── Paper card ─────────────────────────────────────────── */
+  .card {
+    width: min(100%, 640px);
+    background:
+      linear-gradient(180deg, var(--paper), var(--paper-2));
+    color: var(--ink);
+    border-radius: 3px;
+    padding: clamp(2.25rem, 7vw, 4.5rem) clamp(1.5rem, 6vw, 3.75rem);
+    text-align: center;
+    position: relative;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.5) inset,
+      0 30px 60px -25px rgba(0,0,0,0.7),
+      0 12px 24px -18px rgba(0,0,0,0.6);
+  }
+  /* faint paper grain */
+  .card::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image:
+      radial-gradient(rgba(84,90,63,0.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+  }
+  .card > * { position: relative; }
+
+  /* ── Ornaments ──────────────────────────────────────────── */
+  .sprig { color: var(--olive); display: block; margin: 0 auto; }
+  .sprig--top    { width: clamp(64px, 18vw, 96px); }
+  .sprig--bottom { width: clamp(72px, 20vw, 108px); margin-top: clamp(1.75rem, 5vw, 2.75rem); }
+
+  .draw path, .draw line {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: draw 1.6s ease forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* ── Type ───────────────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--body);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: clamp(0.62rem, 2.2vw, 0.72rem);
+    color: var(--olive-deep);
+    line-height: 1.9;
+    margin-top: 1.5rem;
+  }
+
+  .names {
+    font-family: var(--display);
+    font-weight: 600;
+    color: var(--olive-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.02;
+    font-size: clamp(2.9rem, 13vw, 5.2rem);
+    margin: 0.6rem 0;
+  }
+  .names .amp {
+    display: block;
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    color: var(--gold-deep);
+    font-size: 0.46em;
+    letter-spacing: 0;
+    margin: 0.12em 0;
+  }
+
+  .lede {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: clamp(0.72rem, 2.6vw, 0.86rem);
+    line-height: 2.05;
+    color: var(--ink);
+    max-width: 30ch;
+    margin: 0 auto;
+  }
+
+  .when { margin-top: 0.4rem; }
+  .when .date {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: clamp(1.35rem, 5.5vw, 1.9rem);
+    color: var(--olive-deep);
+  }
+  .when .time {
+    font-family: var(--display);
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-top: 0.15rem;
+  }
+  .when .sub,
+  .where .sub {
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: clamp(0.58rem, 2.2vw, 0.68rem);
+    color: var(--ink-soft);
+    margin-top: 0.45rem;
+  }
+  .where .venue {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: clamp(1.15rem, 4.8vw, 1.6rem);
+    color: var(--olive-deep);
+  }
+  .where .place {
+    letter-spacing: 0.06em;
+    font-size: clamp(0.82rem, 3vw, 0.95rem);
+    color: var(--ink);
+    margin-top: 0.2rem;
+  }
+
+  /* heart / diamond divider */
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.85rem;
+    margin: clamp(1.4rem, 4vw, 2rem) 0;
+    color: var(--gold);
+  }
+  .divider::before,
+  .divider::after {
+    content: ""; height: 1px; width: clamp(28px, 12vw, 64px);
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+  .divider svg { width: 11px; height: 11px; opacity: 0.9; }
+
+  /* ── Countdown ──────────────────────────────────────────── */
+  .panel {
+    width: min(100%, 640px);
+    text-align: center;
+    color: var(--paper);
+  }
+  .panel .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: clamp(0.6rem, 2.4vw, 0.72rem);
+    color: rgba(245,242,233,0.6);
+    margin-bottom: 1.1rem;
+  }
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.4rem, 2vw, 1rem);
+  }
+  .unit {
+    background: rgba(245,242,233,0.04);
+    border: 1px solid rgba(245,242,233,0.12);
+    border-radius: 4px;
+    padding: clamp(0.7rem, 3vw, 1.15rem) 0.25rem;
+  }
+  .unit .num {
+    font-family: var(--display);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.7rem, 8vw, 2.8rem);
+    color: var(--paper);
+    line-height: 1;
+  }
+  .unit .lbl {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: clamp(0.5rem, 2vw, 0.62rem);
+    color: var(--gold);
+    margin-top: 0.5rem;
+  }
+  .married {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    color: var(--gold);
+  }
+
+  /* ── Actions ────────────────────────────────────────────── */
+  .actions {
+    width: min(100%, 640px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .btn {
+    flex: 1 1 200px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 52px;
+    padding: 0 1.4rem;
+    font-family: var(--body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .btn svg { width: 17px; height: 17px; }
+  .btn--solid {
+    background: var(--gold);
+    color: #2a2416;
+    border: 1px solid var(--gold);
+  }
+  .btn--solid:hover { background: var(--gold-deep); }
+  .btn--ghost {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid rgba(245,242,233,0.3);
+  }
+  .btn--ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .rsvp {
+    width: min(100%, 640px);
+    text-align: center;
+    color: rgba(245,242,233,0.75);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+  }
+  .rsvp b { color: var(--paper); font-weight: 600; }
+
+  .footer {
+    text-align: center;
+    color: rgba(245,242,233,0.45);
+    font-family: var(--display);
+    font-style: italic;
+    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+  }
+
+  /* ── Load animation ─────────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(14px); }
+  .in { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+    .draw path, .draw line { stroke-dashoffset: 0; animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+</head>
+<body>
+<main>
+  <!-- ══ Invitation card ══ -->
+  <article class="card">
+    <svg class="sprig sprig--top draw" viewBox="0 0 120 70" fill="none"
+         stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+      <path d="M60 66 C60 42 60 22 60 8"/>
+      <path d="M60 20 C50 16 43 18 38 25 C46 27 54 26 60 20Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M60 20 C70 16 77 18 82 25 C74 27 66 26 60 20Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M60 33 C51 30 45 32 41 39 C48 41 55 40 60 33Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M60 33 C69 30 75 32 79 39 C72 41 65 40 60 33Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M60 46 C52 43 47 45 43 51 C49 53 55 52 60 46Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M60 46 C68 43 73 45 77 51 C71 53 65 52 60 46Z" fill="currentColor" stroke="none" opacity="0.85"/>
+    </svg>
+
+    <p class="eyebrow reveal">Приглашение&ensp;на&ensp;свадьбу</p>
+
+    <h1 class="names reveal">
+      Акназар
+      <span class="amp">&amp;</span>
+      Медина
+    </h1>
+
+    <div class="divider reveal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
+    </div>
+
+    <p class="lede reveal">
+      Дорогие родные и друзья! С огромной радостью приглашаем вас
+      разделить с нами самый важный день нашей жизни —
+      день нашей свадьбы.
+    </p>
+
+    <div class="divider reveal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
+    </div>
+
+    <div class="when reveal">
+      <div class="date">22 августа 2026</div>
+      <div class="time">17:00</div>
+      <div class="sub">Начало торжества</div>
+    </div>
+
+    <div class="divider reveal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
+    </div>
+
+    <div class="where reveal">
+      <div class="venue">Ресторан «Меридиана»</div>
+      <div class="place">с. Мырза-Аке</div>
+    </div>
+
+    <svg class="sprig sprig--bottom draw" viewBox="0 0 140 40" fill="none"
+         stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+      <path d="M70 34 C58 30 40 26 16 22"/>
+      <path d="M70 34 C82 30 100 26 124 22"/>
+      <path d="M40 27 C36 20 37 15 42 11 C45 17 45 23 40 27Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M55 30 C52 23 53 18 58 15 C60 21 60 27 55 30Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M100 27 C104 20 103 15 98 11 C95 17 95 23 100 27Z" fill="currentColor" stroke="none" opacity="0.85"/>
+      <path d="M85 30 C88 23 87 18 82 15 C80 21 80 27 85 30Z" fill="currentColor" stroke="none" opacity="0.85"/>
+    </svg>
+  </article>
+
+  <!-- ══ Countdown ══ -->
+  <section class="panel reveal" aria-label="Обратный отсчёт">
+    <p class="kicker">До торжества осталось</p>
+    <div class="countdown" id="cd">
+      <div class="unit"><div class="num" id="d">—</div><div class="lbl">дней</div></div>
+      <div class="unit"><div class="num" id="h">—</div><div class="lbl">часов</div></div>
+      <div class="unit"><div class="num" id="m">—</div><div class="lbl">минут</div></div>
+      <div class="unit"><div class="num" id="s">—</div><div class="lbl">секунд</div></div>
+    </div>
+  </section>
+
+  <!-- ══ Actions ══ -->
+  <nav class="actions reveal">
+    <a class="btn btn--solid" id="ics" href="#" download="svadba-aknazar-medina.ics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      В календарь
+    </a>
+    <a class="btn btn--ghost" target="_blank" rel="noopener"
+       href="https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9C%D0%B5%D1%80%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Как добраться
+    </a>
+  </nav>
+
+  <p class="rsvp reveal">
+    Будем счастливы видеть вас в этот особенный день.<br>
+    Просим подтвердить своё присутствие до <b>15 августа</b>.
+  </p>
+
+  <p class="footer reveal">Акназар &amp; Медина · 22.08.2026</p>
+</main>
+
+<script>
+  // ── Staggered reveal on load ──
+  (function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    items.forEach(function (el, i) {
+      setTimeout(function () { el.classList.add('in'); }, 220 + i * 130);
+    });
+  })();
+
+  // ── Countdown to 22 Aug 2026, 17:00 (local) ──
+  (function () {
+    var target = new Date(2026, 7, 22, 17, 0, 0).getTime();
+    var $d = document.getElementById('d'), $h = document.getElementById('h'),
+        $m = document.getElementById('m'), $s = document.getElementById('s'),
+        $cd = document.getElementById('cd');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        $cd.innerHTML = '<div class="married" style="grid-column:1/-1">Сегодня наш день ♥</div>';
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      $d.textContent = Math.floor(s / 86400);
+      $h.textContent = pad(Math.floor(s % 86400 / 3600));
+      $m.textContent = pad(Math.floor(s % 3600 / 60));
+      $s.textContent = pad(s % 60);
+      requestAnimationFrame(function () { setTimeout(tick, 1000); });
+    }
+    tick();
+  })();
+
+  // ── Build .ics calendar file as a data URI ──
+  (function () {
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//svadba//RU',
+      'BEGIN:VEVENT',
+      'UID:aknazar-medina-2026@svadba',
+      'DTSTART:20260822T170000',
+      'DTEND:20260822T230000',
+      'SUMMARY:Свадьба Акназар \\& Медина',
+      'LOCATION:Ресторан «Меридиана»\\, с. Мырза-Аке',
+      'DESCRIPTION:Начало торжества в 17:00',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    document.getElementById('ics').href =
+      'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+  })();
+</script>
+</body>
+</html>
