@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#e8e3da">
+<meta name="theme-color" content="#e7e5e1">
 <meta name="description" content="Приглашение на свадьбу — Акназар и Медина. 22 августа 2026, ресторан «Меридиана», с. Мырза-Аке.">
-<meta property="og:title" content="Акназар & Медина — Приглашение на свадьбу">
+<meta property="og:title" content="Акназар & Медина — Приглашение">
 <meta property="og:description" content="22 августа 2026 · Ресторан «Меридиана», с. Мырза-Аке">
 <meta property="og:type" content="website">
 <title>Акназар & Медина — Приглашение</title>
@@ -16,22 +16,21 @@
 
 <style>
   :root{
-    --bg:      #e8e3da;
-    --bg-2:    #e2dcd1;
-    --card:    #fdfbf7;
-    --gold:    #bfa063;
-    --gold-2:  #9c7f45;
-    --ink:     #4a463f;
-    --ink-2:   #8b8478;
-    --line:    rgba(160,140,95,.32);
-
+    --bg:     #e7e5e1;
+    --bg-2:   #e1dfda;
+    --card:   #fdfdfb;
+    --gold:   #c1a468;
+    --gold-2: #a1834a;
+    --ink:    #57524a;
+    --ink-2:  #918b7f;
+    --line:   rgba(150,130,90,.3);
     --serif:  'Cormorant Garamond', Georgia, serif;
     --script: 'Marck Script', cursive;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body{
-    font-family:var(--serif); color:var(--ink); line-height:1.65;
+    font-family:var(--serif); color:var(--ink); line-height:1.6;
     background:linear-gradient(180deg,var(--bg),var(--bg-2));
     background-attachment:fixed; overflow-x:hidden;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
@@ -41,8 +40,8 @@
 
   /* language toggle */
   .lang{
-    position:fixed; top:.9rem; right:.9rem; z-index:50;
-    display:inline-flex; background:rgba(253,251,247,.85); backdrop-filter:blur(6px);
+    position:fixed; top:.9rem; right:.9rem; z-index:60;
+    display:inline-flex; background:rgba(253,253,251,.9); backdrop-filter:blur(6px);
     border:1px solid var(--line); border-radius:999px; overflow:hidden;
     box-shadow:0 6px 18px -10px rgba(80,60,20,.5);
   }
@@ -53,99 +52,97 @@
   }
   .lang button.on{ color:#fff; background:var(--gold); }
 
-  section{ padding:clamp(3rem,9vw,5rem) 1.25rem; display:flex; justify-content:center; }
+  section{ padding:clamp(2.5rem,8vw,4.5rem) 1.1rem; display:flex; justify-content:center; }
+
+  /* ─── HERO with flowers ─── */
+  .hero{ position:relative; padding-top:clamp(3rem,9vw,5rem); padding-bottom:clamp(3rem,9vw,5rem); }
+  .peony{ position:absolute; z-index:3; pointer-events:none; filter:drop-shadow(0 10px 16px rgba(90,80,60,.18)); }
+  .peony-tl{ top:-1.5rem; left:-2.5rem; width:clamp(150px,40vw,250px); }
+  .peony-bl{ bottom:-1.5rem; left:-3rem; width:clamp(160px,44vw,270px); }
+
+  .card{
+    position:relative; z-index:2; width:min(100%,520px); margin:0 auto;
+    background:var(--card); border-radius:2px;
+    box-shadow:0 24px 55px -32px rgba(70,55,25,.5), 0 2px 8px rgba(70,55,25,.06);
+    padding:clamp(3.5rem,11vw,5rem) clamp(1.6rem,7vw,3rem) clamp(2.5rem,8vw,3.5rem);
+    text-align:center; overflow:hidden;
+  }
+  .branch{ width:min(96%,420px); margin:-1rem auto clamp(.75rem,3vw,1.5rem); color:var(--gold); }
+  .rings{ position:absolute; top:clamp(1rem,4vw,2rem); right:clamp(.6rem,3vw,1.4rem); width:clamp(54px,16vw,86px); z-index:3; }
+
+  .eyebrow{ text-transform:uppercase; letter-spacing:.3em; font-size:clamp(.72rem,3vw,.9rem); color:var(--ink); font-weight:600; }
+  .body-txt{ text-transform:uppercase; letter-spacing:.13em; font-size:clamp(.7rem,2.8vw,.82rem); color:var(--ink-2); line-height:1.95; max-width:32ch; margin:1rem auto 0; }
+  .date{ display:flex; align-items:center; justify-content:center; gap:.85rem; margin:1.5rem 0 1rem; color:var(--ink); letter-spacing:.26em; font-size:clamp(1.05rem,4.4vw,1.35rem); }
+  .date::before,.date::after{ content:""; height:1px; width:clamp(16px,7vw,34px); background:var(--gold); opacity:.7; }
+  .names{ font-family:var(--script); color:var(--gold-2); line-height:1.1; font-size:clamp(2.5rem,12vw,3.9rem); }
+  .glad{ text-transform:uppercase; letter-spacing:.14em; font-size:clamp(.7rem,2.8vw,.82rem); color:var(--ink-2); line-height:1.95; max-width:30ch; margin:1rem auto 0; }
+  .details{ margin-top:1.7rem; display:flex; flex-direction:column; gap:.4rem; }
+  .details .row{ font-size:clamp(.98rem,4vw,1.18rem); color:var(--ink); letter-spacing:.02em; }
+  .details .row b{ color:var(--ink); font-weight:600; }
+  .details .venue{ color:var(--gold-2); }
+  .details .note{ font-style:italic; font-size:.85rem; color:var(--ink-2); margin-top:.15rem; }
+
+  /* ─── secondary panels ─── */
   .panel{
-    width:min(100%,540px); background:var(--card);
-    border:1px solid var(--line); border-radius:3px;
-    box-shadow:0 20px 45px -30px rgba(70,50,20,.55);
-    padding:clamp(2.25rem,8vw,3.75rem) clamp(1.5rem,7vw,3rem);
-    text-align:center;
+    width:min(100%,520px); background:var(--card); border:1px solid var(--line); border-radius:2px;
+    box-shadow:0 18px 40px -30px rgba(70,55,25,.5);
+    padding:clamp(2.25rem,8vw,3.25rem) clamp(1.5rem,7vw,2.75rem); text-align:center;
   }
+  h2.title{ font-family:var(--script); font-weight:400; color:var(--gold-2); font-size:clamp(1.9rem,8vw,2.5rem); line-height:1.1; margin:0 0 1.2rem; }
 
-  .eyebrow{
-    text-transform:uppercase; letter-spacing:.32em;
-    font-size:clamp(.66rem,2.6vw,.8rem); color:var(--ink); font-weight:600;
-  }
-  .body-txt{
-    text-transform:uppercase; letter-spacing:.12em;
-    font-size:clamp(.74rem,2.9vw,.86rem); color:var(--ink-2); line-height:2;
-    max-width:34ch; margin:1.1rem auto 0;
-  }
-  .date{
-    display:flex; align-items:center; justify-content:center; gap:.9rem;
-    margin:1.7rem 0 1.1rem; color:var(--gold-2);
-    letter-spacing:.28em; font-size:clamp(1.05rem,4.2vw,1.35rem); font-weight:500;
-  }
-  .date::before,.date::after{ content:""; height:1px; width:clamp(20px,9vw,44px); background:var(--line); }
-  .names{
-    font-family:var(--script); color:var(--gold-2); font-weight:400;
-    line-height:1.15; font-size:clamp(2.4rem,11vw,3.6rem);
-  }
-  .glad{
-    text-transform:uppercase; letter-spacing:.13em;
-    font-size:clamp(.72rem,2.8vw,.84rem); color:var(--ink-2); line-height:2;
-    max-width:32ch; margin:1.1rem auto 0;
-  }
-  .details{ margin-top:1.9rem; display:flex; flex-direction:column; gap:.35rem; }
-  .details .time{ font-size:clamp(1.05rem,4vw,1.25rem); color:var(--ink); letter-spacing:.04em; }
-  .details .venue{ font-size:clamp(1.1rem,4.4vw,1.4rem); color:var(--gold-2); margin-top:.7rem; }
-  .details .place{ text-transform:uppercase; letter-spacing:.18em; font-size:.72rem; color:var(--ink-2); }
-
-  /* floral line-art at card top */
-  .floral{ width:min(78%,300px); margin:0 auto clamp(.5rem,3vw,1.25rem); color:var(--gold); }
-
-  h2.title{
-    font-family:var(--script); font-weight:400; color:var(--gold-2);
-    font-size:clamp(2rem,8vw,2.7rem); line-height:1.1; margin:.15rem 0 1.3rem;
-  }
-
-  /* program */
-  .timeline{ display:flex; flex-direction:column; gap:1.6rem; }
-  .tl{ display:flex; flex-direction:column; align-items:center; gap:.4rem; }
-  .tl .ic{ color:var(--gold); }
-  .tl .ic svg{ width:38px; height:38px; }
-  .tl .t{ font-size:clamp(1.3rem,5.5vw,1.7rem); color:var(--gold-2); letter-spacing:.05em; }
-  .tl .d{ text-transform:uppercase; letter-spacing:.18em; font-size:.7rem; color:var(--ink-2); }
-
-  /* calendar + countdown */
-  .cal{ margin:0 auto 0; max-width:330px; border:1px solid var(--line); border-radius:4px; padding:.9rem .9rem 1.1rem; }
-  .cal .mo{ font-family:var(--script); color:var(--gold-2); font-size:1.5rem; margin-bottom:.5rem; }
+  .cal{ margin:0 auto; max-width:320px; border:1px solid var(--line); border-radius:4px; padding:.9rem .9rem 1.1rem; }
+  .cal .mo{ font-family:var(--script); color:var(--gold-2); font-size:1.45rem; margin-bottom:.5rem; }
   .cal table{ width:100%; border-collapse:collapse; }
-  .cal th{ font-size:.58rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); padding:.3rem 0; font-weight:600; }
+  .cal th{ font-size:.56rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-2); padding:.3rem 0; font-weight:600; }
   .cal td{ padding:.26rem 0; font-size:.9rem; color:var(--ink); text-align:center; }
   .cal td.hi span{ display:inline-flex; align-items:center; justify-content:center; width:1.9rem; height:1.9rem; border-radius:50%; background:var(--gold); color:#fff; font-weight:600; box-shadow:0 3px 8px rgba(150,120,50,.4); }
-  .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:1.5rem; }
+  .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:1.4rem; }
   .cd{ border:1px solid var(--line); border-radius:4px; padding:.7rem .2rem; }
   .cd .n{ font-size:clamp(1.4rem,6.5vw,2rem); color:var(--gold-2); font-variant-numeric:tabular-nums; line-height:1; }
   .cd .l{ text-transform:uppercase; letter-spacing:.1em; font-size:.54rem; color:var(--ink-2); margin-top:.4rem; }
 
-  /* location */
-  .venue-name{ font-size:clamp(1.35rem,5.5vw,1.8rem); color:var(--gold-2); }
-  .mapbox{ margin-top:1.3rem; border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:0 14px 30px -24px rgba(70,50,20,.6); }
-  .mapbox iframe{ width:100%; height:220px; border:0; display:block; filter:sepia(.1) saturate(.95); }
-  a.btn{
-    display:inline-flex; align-items:center; justify-content:center; text-decoration:none;
-    margin-top:1.2rem; min-height:50px; padding:0 1.6rem; border-radius:3px;
-    background:var(--gold); color:#fff; font-size:.76rem; text-transform:uppercase; letter-spacing:.18em;
-    transition:filter .2s ease, transform .12s ease;
-  }
+  .venue-name{ font-size:clamp(1.3rem,5.5vw,1.7rem); color:var(--gold-2); }
+  .mapbox{ margin-top:1.2rem; border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:0 14px 30px -24px rgba(70,50,20,.6); }
+  .mapbox iframe{ width:100%; height:210px; border:0; display:block; filter:sepia(.08) saturate(.95); }
+  a.btn{ display:inline-flex; align-items:center; justify-content:center; text-decoration:none; margin-top:1.1rem; min-height:48px; padding:0 1.5rem; border-radius:3px; background:var(--gold); color:#fff; font-size:.74rem; text-transform:uppercase; letter-spacing:.16em; transition:filter .2s ease, transform .12s ease; }
   a.btn:hover{ filter:brightness(1.05); } a.btn:active{ transform:translateY(1px); }
   a.btn:focus-visible{ outline:2px solid var(--gold-2); outline-offset:3px; }
 
-  footer{ text-align:center; padding:2.5rem 1.25rem 3.5rem; }
-  footer .fn{ font-family:var(--script); font-size:1.8rem; color:var(--gold-2); }
-  footer .fd{ letter-spacing:.24em; font-size:.78rem; margin-top:.3rem; color:var(--ink-2); }
+  footer{ text-align:center; padding:2.25rem 1.1rem 3.25rem; }
+  footer .fn{ font-family:var(--script); font-size:1.7rem; color:var(--gold-2); }
+  footer .fd{ letter-spacing:.24em; font-size:.76rem; margin-top:.3rem; color:var(--ink-2); }
 
-  .rise{ opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .rise{ opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
   .rise.vis{ opacity:1; transform:none; }
-
-  @media (prefers-reduced-motion:reduce){
-    html{ scroll-behavior:auto; }
-    .rise{ opacity:1; transform:none; transition:none; }
-  }
+  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .rise{ opacity:1; transform:none; transition:none; } }
 </style>
 </head>
 <body>
+
+  <!-- shared flower definition -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <path id="petal" d="M0 0 C -13 -19 -13 -47 0 -64 C 13 -47 13 -19 0 0 Z"/>
+    <g id="bloom">
+      <g fill="#e7e5df" stroke="#dcdad3" stroke-width=".7">
+        <use href="#petal" transform="rotate(0)"/><use href="#petal" transform="rotate(45)"/>
+        <use href="#petal" transform="rotate(90)"/><use href="#petal" transform="rotate(135)"/>
+        <use href="#petal" transform="rotate(180)"/><use href="#petal" transform="rotate(225)"/>
+        <use href="#petal" transform="rotate(270)"/><use href="#petal" transform="rotate(315)"/>
+      </g>
+      <g fill="#f3f1ec" stroke="#e6e4dd" stroke-width=".6" transform="scale(.72)">
+        <use href="#petal" transform="rotate(22)"/><use href="#petal" transform="rotate(67)"/>
+        <use href="#petal" transform="rotate(112)"/><use href="#petal" transform="rotate(157)"/>
+        <use href="#petal" transform="rotate(202)"/><use href="#petal" transform="rotate(247)"/>
+        <use href="#petal" transform="rotate(292)"/><use href="#petal" transform="rotate(337)"/>
+      </g>
+      <g fill="#fbfaf7" stroke="#efece5" stroke-width=".5" transform="scale(.44)">
+        <use href="#petal" transform="rotate(0)"/><use href="#petal" transform="rotate(60)"/>
+        <use href="#petal" transform="rotate(120)"/><use href="#petal" transform="rotate(180)"/>
+        <use href="#petal" transform="rotate(240)"/><use href="#petal" transform="rotate(300)"/>
+      </g>
+      <circle r="7" fill="#efece4"/>
+    </g>
+  </defs></svg>
 
   <div class="lang" role="group" aria-label="Тил / Язык">
     <button id="ky" type="button">Кыр</button>
@@ -154,35 +151,61 @@
 
 <main>
   <!-- ══ ПРИГЛАШЕНИЕ ══ -->
-  <section>
-    <div class="panel rise">
-      <svg class="floral" viewBox="0 0 300 120" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
-        <path d="M20 96 C90 84 150 70 210 40 C232 29 250 22 274 20"/>
-        <path d="M210 40 C205 26 208 14 220 8 C224 20 222 33 210 40Z" fill="currentColor" stroke="none" opacity=".85"/>
-        <path d="M210 40 C224 34 238 34 248 42 C236 50 220 50 210 40Z" fill="currentColor" stroke="none" opacity=".85"/>
-        <path d="M168 54 C164 42 167 32 178 27 C181 38 179 49 168 54Z" fill="currentColor" stroke="none" opacity=".7"/>
-        <path d="M168 54 C180 49 193 50 202 57 C191 64 177 63 168 54Z" fill="currentColor" stroke="none" opacity=".7"/>
-        <path d="M124 66 C120 55 123 46 133 41 C136 51 134 61 124 66Z" fill="currentColor" stroke="none" opacity=".6"/>
-        <path d="M96 74 C104 70 114 71 121 77 C112 83 101 82 96 74Z" fill="currentColor" stroke="none" opacity=".55"/>
-        <circle cx="150" cy="60" r="2.4" fill="currentColor" stroke="none"/>
-        <circle cx="60" cy="86" r="2" fill="currentColor" stroke="none" opacity=".7"/>
+  <section class="hero">
+    <svg class="peony peony-tl" viewBox="0 0 220 200" aria-hidden="true">
+      <use href="#bloom" transform="translate(70 70) scale(1.15)"/>
+      <use href="#bloom" transform="translate(150 120) scale(.85)"/>
+      <use href="#bloom" transform="translate(45 150) scale(.7)"/>
+    </svg>
+
+    <div class="card rise">
+      <svg class="branch" viewBox="0 0 420 130" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" aria-hidden="true">
+        <!-- main stem -->
+        <path d="M18 112 C110 96 180 78 250 52 C300 34 350 26 404 24"/>
+        <!-- leaves -->
+        <path d="M92 96 C82 80 86 66 102 60 C106 76 104 90 92 96Z" opacity=".85"/>
+        <path d="M92 96 C104 88 120 88 132 96 C118 104 102 104 92 96Z" opacity=".85"/>
+        <path d="M150 82 C168 76 184 78 196 88 C182 96 162 94 150 82Z" opacity=".7"/>
+        <!-- magnolia bloom 1 (large) -->
+        <g transform="translate(250 52)">
+          <path d="M0 0 C -10 -20 -9 -40 3 -54"/>
+          <path d="M0 0 C -22 -14 -34 -30 -34 -50 C -14 -44 -2 -28 0 0"/>
+          <path d="M0 0 C -2 -26 6 -46 22 -56 C 20 -34 12 -14 0 0"/>
+          <path d="M0 0 C 18 -18 40 -22 56 -14 C 40 0 16 4 0 0"/>
+          <path d="M0 0 C 14 -8 34 -6 46 4 C 32 12 12 10 0 0"/>
+        </g>
+        <!-- magnolia bloom 2 (medium) -->
+        <g transform="translate(340 34) scale(.8)">
+          <path d="M0 0 C -8 -18 -7 -36 4 -48"/>
+          <path d="M0 0 C -20 -12 -30 -28 -30 -46 C -12 -40 -2 -26 0 0"/>
+          <path d="M0 0 C -2 -24 6 -42 20 -52 C 18 -32 10 -12 0 0"/>
+          <path d="M0 0 C 16 -16 36 -20 50 -12 C 36 0 14 4 0 0"/>
+        </g>
+        <!-- bud -->
+        <path d="M394 28 C388 16 390 6 400 2 C404 12 402 22 394 28Z" opacity=".8"/>
       </svg>
 
       <div class="eyebrow" data-i18n="guests">ДОРОГИЕ ГОСТИ!</div>
       <p class="body-txt" data-i18n="invite">Приглашаем вас на торжество, посвящённое нашему бракосочетанию</p>
 
-      <div class="date"><span data-i18n="date">22&nbsp;08&nbsp;2026</span></div>
+      <div class="date"><span data-i18n="date">22 08 2026</span></div>
 
       <div class="names" data-i18n="names">Акназар и Медина</div>
 
       <p class="glad" data-i18n="glad">Мы будем искренне рады разделить этот день с вами</p>
 
       <div class="details">
-        <div class="time"><b>17:00</b> — <span data-i18n="startlabel">Начало торжества</span></div>
-        <div class="venue" data-i18n="venue">Ресторан «Меридиана»</div>
-        <div class="place" data-i18n="place">с. Мырза-Аке</div>
+        <div class="row"><b>17:00</b> — <span data-i18n="startlabel">Начало торжества</span></div>
+        <div class="row venue" data-i18n="venue">Ресторан «Меридиана»</div>
+        <div class="note" data-i18n="place">с. Мырза-Аке</div>
       </div>
     </div>
+
+    <svg class="peony peony-bl" viewBox="0 0 240 200" aria-hidden="true">
+      <use href="#bloom" transform="translate(80 120) scale(1.25)"/>
+      <use href="#bloom" transform="translate(165 85) scale(.8)"/>
+      <use href="#bloom" transform="translate(40 60) scale(.68)"/>
+    </svg>
   </section>
 
   <!-- ══ КАЛЕНДАРЬ + ОТСЧЁТ ══ -->
@@ -230,13 +253,9 @@
     ru:{
       guests:"ДОРОГИЕ ГОСТИ!",
       invite:"Приглашаем вас на торжество, посвящённое нашему бракосочетанию",
-      date:"22 08 2026",
-      names:"Акназар и Медина",
+      date:"22 08 2026", names:"Акназар и Медина",
       glad:"Мы будем искренне рады разделить этот день с вами",
-      startlabel:"Начало торжества",
-      venue:"Ресторан «Меридиана»", place:"с. Мырза-Аке",
-      progTitle:"Программа",
-      p1:"Сбор гостей", p2:"Начало торжества", p3:"Свадебный торт", p4:"Окончание вечера",
+      startlabel:"Начало торжества", venue:"Ресторан «Меридиана»", place:"с. Мырза-Аке",
       cdTitle:"До торжества", month:"Август 2026",
       uDays:"дней", uHrs:"часов", uMin:"минут", uSec:"секунд",
       locTitle:"Как добраться", venue2:"Ресторан «Меридиана»", place2:"с. Мырза-Аке",
@@ -246,13 +265,9 @@
     ky:{
       guests:"УРМАТТУУ КОНОКТОР!",
       invite:"Никебизге арналган салтанатка сиздерди чакырабыз",
-      date:"22 08 2026",
-      names:"Акназар жана Медина",
+      date:"22 08 2026", names:"Акназар жана Медина",
       glad:"Бул күндү сиздер менен бөлүшүүгө чын жүрөктөн кубанычтабыз",
-      startlabel:"Салтанаттын башталышы",
-      venue:"«Меридиана» ресторан", place:"Мырза-Аке айылы",
-      progTitle:"Иш-чара",
-      p1:"Коноктордун жыйналышы", p2:"Салтанаттын башталышы", p3:"Той торту", p4:"Кеченин аякталышы",
+      startlabel:"Салтанаттын башталышы", venue:"«Меридиана» ресторан", place:"Мырза-Аке айылы",
       cdTitle:"Салтанатка чейин", month:"2026-жыл, август",
       uDays:"күн", uHrs:"саат", uMin:"мүнөт", uSec:"секунд",
       locTitle:"Кантип жетесиз", venue2:"«Меридиана» ресторан", place2:"Мырза-Аке айылы",
@@ -263,11 +278,10 @@
 
   function applyLang(lang){
     var t=I18N[lang];
-    document.documentElement.lang = (lang==="ky"?"ky":"ru");
+    document.documentElement.lang=(lang==='ky'?'ky':'ru');
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k=el.getAttribute('data-i18n'); if(t[k]!=null) el.textContent=t[k];
     });
-    // weekday headers
     var row=document.getElementById('wdrow'); row.innerHTML='';
     t.wd.forEach(function(w){ var th=document.createElement('th'); th.textContent=w; row.appendChild(th); });
     document.getElementById('ky').classList.toggle('on', lang==='ky');
@@ -277,7 +291,6 @@
   document.getElementById('ky').onclick=function(){ applyLang('ky'); };
   document.getElementById('ru').onclick=function(){ applyLang('ru'); };
 
-  // календарь августа 2026
   (function(){
     var year=2026,month=7,mark=22;
     var offset=(new Date(year,month,1).getDay()+6)%7;
@@ -294,14 +307,13 @@
     if(c%7!==0) body.appendChild(row);
   })();
 
-  // отсчёт
   (function(){
     var t=WEDDING.getTime();
     var D=document.getElementById('d'),H=document.getElementById('h'),M=document.getElementById('m'),S=document.getElementById('s');
     function p(n){return (n<10?'0':'')+n;}
     function tick(){
       var diff=t-Date.now();
-      if(diff<=0){ document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Marck Script'"+',cursive;font-size:1.7rem;color:#9c7f45">&#9829;</div>'; return; }
+      if(diff<=0){ document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Marck Script'"+',cursive;font-size:1.6rem;color:#a1834a">&#9829;</div>'; return; }
       var s=Math.floor(diff/1000);
       D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
       M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);
@@ -310,7 +322,6 @@
     tick();
   })();
 
-  // появление при прокрутке
   (function(){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('vis'); io.unobserve(en.target); }});
@@ -318,7 +329,6 @@
     document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
   })();
 
-  // старт: сохранённый язык или русский
   var saved='ru'; try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){}
   applyLang(saved);
 </script>
