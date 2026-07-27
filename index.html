@@ -3,341 +3,208 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f3e6da">
+<meta name="theme-color" content="#e8e3da">
 <meta name="description" content="Приглашение на свадьбу — Акназар и Медина. 22 августа 2026, ресторан «Меридиана», с. Мырза-Аке.">
 <meta property="og:title" content="Акназар & Медина — Приглашение на свадьбу">
-<meta property="og:description" content="22 августа 2026 · 17:00 · Ресторан «Меридиана», с. Мырза-Аке">
+<meta property="og:description" content="22 августа 2026 · Ресторан «Меридиана», с. Мырза-Аке">
 <meta property="og:type" content="website">
-<title>Акназар & Медина — Приглашение на свадьбу</title>
+<title>Акназар & Медина — Приглашение</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Marck+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marck+Script&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --blush:   #f4e7db;
-    --blush-2: #efe0d2;
-    --cream:   #fbf4ec;
-    --panel:   #fdf8f1;
-    --gold:    #bd9558;
-    --gold-2:  #a67c3d;
-    --gold-lt: #d8b985;
-    --ink:     #5c4a39;
-    --ink-2:   #8c7962;
-    --rose:    #cda693;
-    --line:    rgba(166,124,61,.38);
+    --bg:      #e8e3da;
+    --bg-2:    #e2dcd1;
+    --card:    #fdfbf7;
+    --gold:    #bfa063;
+    --gold-2:  #9c7f45;
+    --ink:     #4a463f;
+    --ink-2:   #8b8478;
+    --line:    rgba(160,140,95,.32);
 
     --serif:  'Cormorant Garamond', Georgia, serif;
-    --script: 'Great Vibes', cursive;
-    --hand:   'Marck Script', cursive;
+    --script: 'Marck Script', cursive;
   }
-
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
   body{
-    font-family:var(--serif);
-    color:var(--ink);
-    background:var(--blush);
-    line-height:1.6;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
+    font-family:var(--serif); color:var(--ink); line-height:1.65;
+    background:linear-gradient(180deg,var(--bg),var(--bg-2));
+    background-attachment:fixed; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  body.locked{ overflow:hidden; height:100vh; }
-
   img,svg{ max-width:100%; display:block; }
   .muted{ color:var(--ink-2); }
 
-  body::before{
-    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-    opacity:.5; mix-blend-mode:multiply;
-    background:radial-gradient(rgba(166,124,61,.05) 1px, transparent 1px);
-    background-size:5px 5px;
+  /* language toggle */
+  .lang{
+    position:fixed; top:.9rem; right:.9rem; z-index:50;
+    display:inline-flex; background:rgba(253,251,247,.85); backdrop-filter:blur(6px);
+    border:1px solid var(--line); border-radius:999px; overflow:hidden;
+    box-shadow:0 6px 18px -10px rgba(80,60,20,.5);
   }
-  main{ position:relative; z-index:1; }
+  .lang button{
+    border:0; background:transparent; cursor:pointer; font-family:var(--serif);
+    font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-2); padding:.5rem .85rem; transition:color .2s ease;
+  }
+  .lang button.on{ color:#fff; background:var(--gold); }
 
-  section{ padding:clamp(3.5rem,10vw,6rem) 1.25rem; }
-  .wrap{ width:min(100%,560px); margin:0 auto; }
-
-  .frame{
-    position:relative;
-    background:linear-gradient(180deg,var(--panel),var(--cream));
-    border:1px solid var(--line);
-    box-shadow:0 0 0 5px var(--cream), 0 0 0 6px var(--line),
-               0 26px 50px -30px rgba(80,50,20,.5);
-    padding:clamp(2rem,7vw,3.25rem) clamp(1.4rem,6vw,2.75rem);
+  section{ padding:clamp(3rem,9vw,5rem) 1.25rem; display:flex; justify-content:center; }
+  .panel{
+    width:min(100%,540px); background:var(--card);
+    border:1px solid var(--line); border-radius:3px;
+    box-shadow:0 20px 45px -30px rgba(70,50,20,.55);
+    padding:clamp(2.25rem,8vw,3.75rem) clamp(1.5rem,7vw,3rem);
     text-align:center;
-    border-radius:2px;
   }
 
   .eyebrow{
-    text-transform:uppercase; letter-spacing:.34em;
-    font-size:clamp(.6rem,2.4vw,.72rem); color:var(--gold-2);
+    text-transform:uppercase; letter-spacing:.32em;
+    font-size:clamp(.66rem,2.6vw,.8rem); color:var(--ink); font-weight:600;
   }
+  .body-txt{
+    text-transform:uppercase; letter-spacing:.12em;
+    font-size:clamp(.74rem,2.9vw,.86rem); color:var(--ink-2); line-height:2;
+    max-width:34ch; margin:1.1rem auto 0;
+  }
+  .date{
+    display:flex; align-items:center; justify-content:center; gap:.9rem;
+    margin:1.7rem 0 1.1rem; color:var(--gold-2);
+    letter-spacing:.28em; font-size:clamp(1.05rem,4.2vw,1.35rem); font-weight:500;
+  }
+  .date::before,.date::after{ content:""; height:1px; width:clamp(20px,9vw,44px); background:var(--line); }
+  .names{
+    font-family:var(--script); color:var(--gold-2); font-weight:400;
+    line-height:1.15; font-size:clamp(2.4rem,11vw,3.6rem);
+  }
+  .glad{
+    text-transform:uppercase; letter-spacing:.13em;
+    font-size:clamp(.72rem,2.8vw,.84rem); color:var(--ink-2); line-height:2;
+    max-width:32ch; margin:1.1rem auto 0;
+  }
+  .details{ margin-top:1.9rem; display:flex; flex-direction:column; gap:.35rem; }
+  .details .time{ font-size:clamp(1.05rem,4vw,1.25rem); color:var(--ink); letter-spacing:.04em; }
+  .details .venue{ font-size:clamp(1.1rem,4.4vw,1.4rem); color:var(--gold-2); margin-top:.7rem; }
+  .details .place{ text-transform:uppercase; letter-spacing:.18em; font-size:.72rem; color:var(--ink-2); }
+
+  /* floral line-art at card top */
+  .floral{ width:min(78%,300px); margin:0 auto clamp(.5rem,3vw,1.25rem); color:var(--gold); }
+
   h2.title{
-    font-family:var(--hand); font-weight:400;
-    color:var(--gold-2); line-height:1.1;
-    font-size:clamp(2.3rem,9vw,3.2rem);
-    margin:.2rem 0 1.4rem;
-  }
-  .lead{
-    font-size:clamp(1.02rem,3.9vw,1.2rem);
-    color:var(--ink); letter-spacing:.01em;
+    font-family:var(--script); font-weight:400; color:var(--gold-2);
+    font-size:clamp(2rem,8vw,2.7rem); line-height:1.1; margin:.15rem 0 1.3rem;
   }
 
-  .rule{
-    display:flex; align-items:center; justify-content:center; gap:.75rem;
-    margin:1.5rem 0; color:var(--gold);
-  }
-  .rule::before,.rule::after{
-    content:""; height:1px; width:min(28vw,90px);
-    background:linear-gradient(90deg,transparent,var(--line),transparent);
-  }
-  .rule svg{ width:14px; height:14px; }
+  /* program */
+  .timeline{ display:flex; flex-direction:column; gap:1.6rem; }
+  .tl{ display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+  .tl .ic{ color:var(--gold); }
+  .tl .ic svg{ width:38px; height:38px; }
+  .tl .t{ font-size:clamp(1.3rem,5.5vw,1.7rem); color:var(--gold-2); letter-spacing:.05em; }
+  .tl .d{ text-transform:uppercase; letter-spacing:.18em; font-size:.7rem; color:var(--ink-2); }
 
-  /* ─── COVER / SEAL ─── */
-  #hero{
-    position:relative; min-height:100svh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:clamp(2rem,8vw,4rem) 1.25rem;
-    background:radial-gradient(140% 90% at 50% 0%, var(--cream), var(--blush) 55%, var(--blush-2));
-    overflow:hidden;
-  }
-  .wings{
-    position:absolute; top:8%; left:50%; transform:translateX(-50%);
-    width:min(150%,860px); color:var(--gold-lt); opacity:.5; pointer-events:none;
-  }
-  .hero-inner{ position:relative; z-index:2; }
-  .hero-inner .kicker{
-    font-family:var(--script); font-size:clamp(1.9rem,8vw,2.7rem);
-    color:var(--gold-2); line-height:1;
-  }
-  .hero-names{
-    font-weight:500; text-transform:uppercase; letter-spacing:.08em;
-    color:var(--ink); line-height:1.05;
-    font-size:clamp(2.9rem,15vw,5.4rem); margin:.3rem 0 .1rem;
-  }
-  .hero-names .amp{
-    display:block; font-family:var(--script); text-transform:none;
-    letter-spacing:0; color:var(--rose); font-size:.4em; margin:.05em 0;
-  }
-  .hero-date{
-    font-size:clamp(1.3rem,5vw,1.7rem); letter-spacing:.16em;
-    color:var(--gold-2); margin-top:.6rem;
-  }
-  .hero-sub{
-    text-transform:uppercase; letter-spacing:.22em;
-    font-size:clamp(.62rem,2.6vw,.74rem); color:var(--ink-2); margin-top:.5rem;
-  }
-  .scrollcue{
-    margin-top:2.4rem; color:var(--gold-2);
-    text-transform:uppercase; letter-spacing:.22em; font-size:.66rem;
-    opacity:0; animation:fadein 1s ease 1.4s forwards;
-  }
-  .scrollcue svg{ width:20px; height:20px; margin:.4rem auto 0; animation:bob 1.8s ease-in-out infinite; }
-
-  .seal{
-    position:absolute; inset:0; z-index:10;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.4rem;
-    background:radial-gradient(130% 100% at 50% 30%, var(--cream), var(--blush) 60%, var(--blush-2));
-    transition:opacity .9s ease, visibility .9s ease;
-  }
-  .seal.gone{ opacity:0; visibility:hidden; pointer-events:none; }
-  .chain{ width:70px; color:var(--gold-lt); margin-bottom:-.4rem; }
-  .heart{
-    position:relative; width:clamp(150px,44vw,190px); aspect-ratio:1/.94;
-    cursor:pointer; -webkit-tap-highlight-color:transparent;
-    filter:drop-shadow(0 10px 18px rgba(120,80,30,.35));
-  }
-  .heart .half{
-    position:absolute; top:0; height:100%; width:50%; overflow:hidden;
-    transition:transform 1s cubic-bezier(.6,.02,.2,1), opacity 1s ease;
-  }
-  .heart .half svg{ position:absolute; top:0; width:clamp(150px,44vw,190px); height:100%; }
-  .heart .h-l{ left:0; } .heart .h-l svg{ left:0; }
-  .heart .h-r{ right:0; } .heart .h-r svg{ right:0; }
-  .heart .label{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-family:var(--hand); color:#fff6e6; font-size:clamp(1rem,4.6vw,1.3rem);
-    text-shadow:0 1px 3px rgba(90,55,15,.5); transition:opacity .4s ease;
-    pointer-events:none; padding-top:6%; line-height:1.15;
-  }
-  .heart.pulse{ animation:beat 1.7s ease-in-out infinite; }
-  @keyframes beat{ 0%,100%{transform:scale(1)} 12%{transform:scale(1.06)} 24%{transform:scale(1)} 36%{transform:scale(1.04)} }
-  .heart.open{ animation:none; cursor:default; }
-  .heart.open .h-l{ transform:translateX(-64%) rotate(-40deg); opacity:0; }
-  .heart.open .h-r{ transform:translateX(64%) rotate(40deg); opacity:0; }
-  .heart.open .label{ opacity:0; }
-  .seal .hint{ text-transform:uppercase; letter-spacing:.24em; font-size:.66rem; color:var(--ink-2); }
-
-  /* ─── PROGRAM ─── */
-  .timeline{ display:flex; flex-direction:column; gap:1.9rem; margin-top:.6rem; }
-  .tl{ display:flex; flex-direction:column; align-items:center; gap:.45rem; }
-  .tl .ic{ color:var(--gold-2); }
-  .tl .ic svg{ width:44px; height:44px; }
-  .tl .t{ font-size:clamp(1.4rem,6vw,1.9rem); color:var(--gold-2); letter-spacing:.05em; }
-  .tl .d{ text-transform:uppercase; letter-spacing:.2em; font-size:.72rem; color:var(--ink-2); }
-
-  /* ─── CALENDAR + COUNTDOWN ─── */
-  .cal{ margin:1.4rem auto 0; max-width:340px; border:1px solid var(--line); border-radius:4px; padding:1rem 1rem 1.2rem; background:var(--cream); }
-  .cal .mo{ font-family:var(--hand); color:var(--gold-2); font-size:1.7rem; margin-bottom:.5rem; }
+  /* calendar + countdown */
+  .cal{ margin:0 auto 0; max-width:330px; border:1px solid var(--line); border-radius:4px; padding:.9rem .9rem 1.1rem; }
+  .cal .mo{ font-family:var(--script); color:var(--gold-2); font-size:1.5rem; margin-bottom:.5rem; }
   .cal table{ width:100%; border-collapse:collapse; }
-  .cal th{ font-size:.6rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-2); padding:.3rem 0; font-weight:500; }
-  .cal td{ padding:.28rem 0; font-size:.92rem; color:var(--ink); text-align:center; }
-  .cal td.hi span{ display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:50%; background:var(--gold); color:#fff; font-weight:600; box-shadow:0 3px 8px rgba(150,100,40,.4); }
+  .cal th{ font-size:.58rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-2); padding:.3rem 0; font-weight:600; }
+  .cal td{ padding:.26rem 0; font-size:.9rem; color:var(--ink); text-align:center; }
+  .cal td.hi span{ display:inline-flex; align-items:center; justify-content:center; width:1.9rem; height:1.9rem; border-radius:50%; background:var(--gold); color:#fff; font-weight:600; box-shadow:0 3px 8px rgba(150,120,50,.4); }
   .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:1.5rem; }
-  .cd{ border:1px solid var(--line); border-radius:4px; padding:.75rem .2rem; background:var(--panel); }
-  .cd .n{ font-size:clamp(1.5rem,7vw,2.2rem); color:var(--gold-2); font-variant-numeric:tabular-nums; line-height:1; }
-  .cd .l{ text-transform:uppercase; letter-spacing:.12em; font-size:.56rem; color:var(--ink-2); margin-top:.4rem; }
+  .cd{ border:1px solid var(--line); border-radius:4px; padding:.7rem .2rem; }
+  .cd .n{ font-size:clamp(1.4rem,6.5vw,2rem); color:var(--gold-2); font-variant-numeric:tabular-nums; line-height:1; }
+  .cd .l{ text-transform:uppercase; letter-spacing:.1em; font-size:.54rem; color:var(--ink-2); margin-top:.4rem; }
 
-  /* ─── DRESS CODE ─── */
-  .swatches{ display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center; margin-top:1.4rem; }
-  .sw{ width:44px; height:44px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), 0 4px 10px rgba(120,80,30,.18); }
-
-  /* ─── LOCATION ─── */
-  .venue-name{ font-size:clamp(1.5rem,6vw,2rem); color:var(--gold-2); letter-spacing:.04em; }
-  .addr{ color:var(--ink); margin-top:.4rem; }
-  .mapbox{ margin-top:1.4rem; border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:0 14px 30px -22px rgba(80,50,20,.6); }
-  .mapbox iframe{ width:100%; height:230px; border:0; display:block; filter:sepia(.12) saturate(.95); }
-
-  /* ─── RSVP ─── */
-  form{ margin-top:1.5rem; text-align:left; display:flex; flex-direction:column; gap:1.15rem; }
-  label.fld{ display:flex; flex-direction:column; gap:.45rem; font-size:.82rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-2); }
-  .fld{ font-size:.82rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-2); }
-  input[type=text]{ font-family:var(--serif); font-size:1.1rem; color:var(--ink); background:var(--cream); border:1px solid var(--line); border-radius:3px; padding:.7rem .85rem; width:100%; }
-  input[type=text]:focus{ outline:2px solid var(--gold); outline-offset:1px; }
-  .opts{ display:flex; flex-direction:column; gap:.6rem; margin-top:.55rem; }
-  .opt{ display:flex; align-items:center; gap:.6rem; font-size:1rem; text-transform:none; letter-spacing:0; color:var(--ink); cursor:pointer; }
-  .opt input{ accent-color:var(--gold); width:18px; height:18px; }
-  .stepper{ display:inline-flex; align-items:center; gap:.9rem; margin-top:.55rem; }
-  .stepper button{ width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:var(--cream); color:var(--gold-2); font-size:1.4rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
-  .stepper button:active{ transform:translateY(1px); }
-  .stepper .cnt{ font-size:1.4rem; min-width:2ch; text-align:center; color:var(--ink); font-variant-numeric:tabular-nums; }
-  button.send, a.send{
-    margin-top:.4rem; min-height:54px; border:none; border-radius:3px;
-    background:linear-gradient(180deg,var(--gold-lt),var(--gold));
-    color:#4a3512; font-size:.82rem; text-transform:uppercase; letter-spacing:.2em;
-    cursor:pointer; transition:filter .2s ease, transform .12s ease; font-family:var(--serif);
+  /* location */
+  .venue-name{ font-size:clamp(1.35rem,5.5vw,1.8rem); color:var(--gold-2); }
+  .mapbox{ margin-top:1.3rem; border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:0 14px 30px -24px rgba(70,50,20,.6); }
+  .mapbox iframe{ width:100%; height:220px; border:0; display:block; filter:sepia(.1) saturate(.95); }
+  a.btn{
     display:inline-flex; align-items:center; justify-content:center; text-decoration:none;
+    margin-top:1.2rem; min-height:50px; padding:0 1.6rem; border-radius:3px;
+    background:var(--gold); color:#fff; font-size:.76rem; text-transform:uppercase; letter-spacing:.18em;
+    transition:filter .2s ease, transform .12s ease;
   }
-  button.send{ width:100%; }
-  button.send:hover, a.send:hover{ filter:brightness(1.04); }
-  button.send:active, a.send:active{ transform:translateY(1px); }
-  .note{ font-size:.82rem; color:var(--ink-2); margin-top:.9rem; text-align:center; }
-  .note b{ color:var(--ink); }
+  a.btn:hover{ filter:brightness(1.05); } a.btn:active{ transform:translateY(1px); }
+  a.btn:focus-visible{ outline:2px solid var(--gold-2); outline-offset:3px; }
 
-  footer{ text-align:center; padding:2.5rem 1.25rem 3.5rem; color:var(--ink-2); }
-  footer .fn{ font-family:var(--script); font-size:1.9rem; color:var(--gold-2); }
-  footer .fd{ letter-spacing:.2em; font-size:.8rem; margin-top:.3rem; }
+  footer{ text-align:center; padding:2.5rem 1.25rem 3.5rem; }
+  footer .fn{ font-family:var(--script); font-size:1.8rem; color:var(--gold-2); }
+  footer .fd{ letter-spacing:.24em; font-size:.78rem; margin-top:.3rem; color:var(--ink-2); }
 
-  .rise{ opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .rise{ opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
   .rise.vis{ opacity:1; transform:none; }
-
-  @keyframes fadein{ to{opacity:1} }
-  @keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
     .rise{ opacity:1; transform:none; transition:none; }
-    .heart.pulse{ animation:none; }
-    .scrollcue{ animation:none; opacity:1; }
-    .scrollcue svg{ animation:none; }
   }
 </style>
 </head>
-<body class="locked">
+<body>
+
+  <div class="lang" role="group" aria-label="Тил / Язык">
+    <button id="ky" type="button">Кыр</button>
+    <button id="ru" type="button">Рус</button>
+  </div>
+
 <main>
-
-  <!-- ══ HERO + SEAL ══ -->
-  <section id="hero">
-    <svg class="wings" viewBox="0 0 860 320" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-      <path d="M430 40 C360 70 250 70 150 120 C230 120 300 135 350 165 C270 160 200 175 140 215 C230 205 305 215 360 240 C300 250 245 275 205 300 C300 260 380 250 430 250"/>
-      <path d="M430 40 C500 70 610 70 710 120 C630 120 560 135 510 165 C590 160 660 175 720 215 C630 205 555 215 500 240 C560 250 615 275 655 300 C560 260 480 250 430 250"/>
-    </svg>
-
-    <div class="hero-inner">
-      <div class="kicker">Wedding&nbsp;day</div>
-      <h1 class="hero-names">Акназар<span class="amp">and</span>Медина</h1>
-      <div class="hero-date">22.08.2026</div>
-      <div class="hero-sub">Ресторан «Меридиана» · с. Мырза-Аке</div>
-      <div class="scrollcue">Листайте вниз
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </div>
-    </div>
-
-    <div class="seal" id="seal">
-      <svg class="chain" viewBox="0 0 60 150" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M30 0 C30 30 30 55 30 78" stroke-dasharray="1 6" stroke-linecap="round"/>
-        <circle cx="30" cy="86" r="8"/>
-      </svg>
-
-      <div class="heart pulse" id="heart" role="button" tabindex="0" aria-label="Открыть приглашение">
-        <div class="half h-l">
-          <svg viewBox="0 0 190 178" aria-hidden="true">
-            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#e6c489"/><stop offset=".5" stop-color="#c79a55"/><stop offset="1" stop-color="#a67c3d"/>
-            </linearGradient></defs>
-            <path d="M95 165 C88 158 20 108 20 60 C20 34 38 18 60 18 C76 18 88 28 95 44 C102 28 114 18 130 18 C152 18 170 34 170 60 C170 108 102 158 95 165 Z" fill="url(#g1)"/>
-            <path d="M95 66 C90 60 84 60 80 66 C86 68 92 70 95 66 Z M95 66 C100 60 106 60 110 66 C104 68 98 70 95 66 Z M95 82 L95 60" stroke="#8a6528" stroke-width="1.4" fill="none" opacity=".5"/>
-          </svg>
-        </div>
-        <div class="half h-r">
-          <svg viewBox="0 0 190 178" aria-hidden="true">
-            <path d="M95 165 C88 158 20 108 20 60 C20 34 38 18 60 18 C76 18 88 28 95 44 C102 28 114 18 130 18 C152 18 170 34 170 60 C170 108 102 158 95 165 Z" fill="url(#g1)"/>
-            <path d="M95 66 C90 60 84 60 80 66 C86 68 92 70 95 66 Z M95 66 C100 60 106 60 110 66 C104 68 98 70 95 66 Z M95 82 L95 60" stroke="#8a6528" stroke-width="1.4" fill="none" opacity=".5"/>
-          </svg>
-        </div>
-        <div class="label">Нажми<br>на меня</div>
-      </div>
-
-      <div class="hint">Нажмите на сердце</div>
-    </div>
-  </section>
-
   <!-- ══ ПРИГЛАШЕНИЕ ══ -->
   <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">Приглашение на свадьбу</div>
-      <h2 class="title">Дорогие гости!</h2>
-      <p class="lead">
-        Дорогие наши родные, близкие и друзья! С огромной радостью
-        приглашаем вас разделить с нами самый важный и счастливый день
-        нашей жизни — день нашей свадьбы. Будем рады видеть вас
-        нашими почётными гостями!
-      </p>
-      <div class="rule" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
-      </div>
-      <svg viewBox="0 0 200 120" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="margin:0 auto;width:min(60%,190px)" aria-hidden="true">
-        <path d="M100 52 C78 30 40 26 34 44 C28 62 60 70 100 58 C60 70 30 92 40 106 C52 120 84 92 100 62"/>
-        <path d="M100 52 C122 30 160 26 166 44 C172 62 140 70 100 58 C140 70 170 92 160 106 C148 120 116 92 100 62"/>
-        <circle cx="100" cy="56" r="6" fill="var(--gold)" stroke="none"/>
-        <path d="M96 62 C90 84 84 100 80 112 M104 62 C110 84 116 100 120 112"/>
+    <div class="panel rise">
+      <svg class="floral" viewBox="0 0 300 120" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
+        <path d="M20 96 C90 84 150 70 210 40 C232 29 250 22 274 20"/>
+        <path d="M210 40 C205 26 208 14 220 8 C224 20 222 33 210 40Z" fill="currentColor" stroke="none" opacity=".85"/>
+        <path d="M210 40 C224 34 238 34 248 42 C236 50 220 50 210 40Z" fill="currentColor" stroke="none" opacity=".85"/>
+        <path d="M168 54 C164 42 167 32 178 27 C181 38 179 49 168 54Z" fill="currentColor" stroke="none" opacity=".7"/>
+        <path d="M168 54 C180 49 193 50 202 57 C191 64 177 63 168 54Z" fill="currentColor" stroke="none" opacity=".7"/>
+        <path d="M124 66 C120 55 123 46 133 41 C136 51 134 61 124 66Z" fill="currentColor" stroke="none" opacity=".6"/>
+        <path d="M96 74 C104 70 114 71 121 77 C112 83 101 82 96 74Z" fill="currentColor" stroke="none" opacity=".55"/>
+        <circle cx="150" cy="60" r="2.4" fill="currentColor" stroke="none"/>
+        <circle cx="60" cy="86" r="2" fill="currentColor" stroke="none" opacity=".7"/>
       </svg>
+
+      <div class="eyebrow" data-i18n="guests">ДОРОГИЕ ГОСТИ!</div>
+      <p class="body-txt" data-i18n="invite">Приглашаем вас на торжество, посвящённое нашему бракосочетанию</p>
+
+      <div class="date"><span data-i18n="date">22&nbsp;08&nbsp;2026</span></div>
+
+      <div class="names" data-i18n="names">Акназар и Медина</div>
+
+      <p class="glad" data-i18n="glad">Мы будем искренне рады разделить этот день с вами</p>
+
+      <div class="details">
+        <div class="time"><b>17:00</b> — <span data-i18n="startlabel">Начало торжества</span></div>
+        <div class="venue" data-i18n="venue">Ресторан «Меридиана»</div>
+        <div class="place" data-i18n="place">с. Мырза-Аке</div>
+      </div>
     </div>
   </section>
 
   <!-- ══ ПРОГРАММА ══ -->
   <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">Wedding day</div>
-      <h2 class="title">Программа дня</h2>
+    <div class="panel rise">
+      <h2 class="title" data-i18n="progTitle">Программа</h2>
       <div class="timeline">
         <div class="tl">
-          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="19" cy="28" r="11"/><circle cx="30" cy="28" r="11"/><path d="M15 15l4 5M33 15l-4 5" stroke-linecap="round"/></svg></span>
-          <div class="t">17:00</div><div class="d">Сбор гостей</div>
+          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="19" cy="28" r="11"/><circle cx="30" cy="28" r="11"/><path d="M15 15l4 5M33 15l-4 5" stroke-linecap="round"/></svg></span>
+          <div class="t">17:00</div><div class="d" data-i18n="p1">Сбор гостей</div>
         </div>
         <div class="tl">
-          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M16 10l3 12a5 5 0 0010 0l3-12z"/><path d="M24 27v9M18 40h12"/></svg></span>
-          <div class="t">18:00</div><div class="d">Начало торжества</div>
+          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M16 10l3 12a5 5 0 0010 0l3-12z"/><path d="M24 27v9M18 40h12"/></svg></span>
+          <div class="t">18:00</div><div class="d" data-i18n="p2">Начало торжества</div>
         </div>
         <div class="tl">
-          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V28c0-3 3-5 6-5h12c3 0 6 2 6 5v12z"/><path d="M10 40h28M24 23v-6M24 13v-3"/></svg></span>
-          <div class="t">22:30</div><div class="d">Свадебный торт</div>
+          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V28c0-3 3-5 6-5h12c3 0 6 2 6 5v12z"/><path d="M10 40h28M24 23v-6M24 13v-3"/></svg></span>
+          <div class="t">22:30</div><div class="d" data-i18n="p3">Свадебный торт</div>
         </div>
         <div class="tl">
-          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="4"/><path d="M24 20V9M24 27v12M20 24H9M27 24h12M21 21l-8-8M27 27l8 8M27 21l8-8M21 27l-8 8"/></svg></span>
-          <div class="t">00:00</div><div class="d">Окончание вечера</div>
+          <span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="4"/><path d="M24 20V9M24 27v12M20 24H9M27 24h12M21 21l-8-8M27 27l8 8M27 21l8-8M21 27l-8 8"/></svg></span>
+          <div class="t">00:00</div><div class="d" data-i18n="p4">Окончание вечера</div>
         </div>
       </div>
     </div>
@@ -345,72 +212,33 @@
 
   <!-- ══ КАЛЕНДАРЬ + ОТСЧЁТ ══ -->
   <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">Отметьте дату</div>
-      <h2 class="title">До торжества</h2>
+    <div class="panel rise">
+      <h2 class="title" data-i18n="cdTitle">До торжества</h2>
       <div class="cal">
-        <div class="mo">Август 2026</div>
-        <table><thead><tr>
-          <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
-        </tr></thead><tbody id="calbody"></tbody></table>
+        <div class="mo" data-i18n="month">Август 2026</div>
+        <table><thead><tr id="wdrow"></tr></thead><tbody id="calbody"></tbody></table>
       </div>
       <div class="countdown" id="cd">
-        <div class="cd"><div class="n" id="d">—</div><div class="l">дней</div></div>
-        <div class="cd"><div class="n" id="h">—</div><div class="l">часов</div></div>
-        <div class="cd"><div class="n" id="m">—</div><div class="l">минут</div></div>
-        <div class="cd"><div class="n" id="s">—</div><div class="l">секунд</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ ДРЕСС-КОД ══ -->
-  <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">Пожелание к образу</div>
-      <h2 class="title">Дресс-код</h2>
-      <p class="lead">
-        Для нас самое главное — ваше присутствие! Но мы будем очень
-        признательны, если вы поддержите цветовую гамму нашей свадьбы.
-      </p>
-      <div class="swatches" aria-hidden="true">
-        <span class="sw" style="background:#6e7355"></span>
-        <span class="sw" style="background:#a7ab8c"></span>
-        <span class="sw" style="background:#d8cbb4"></span>
-        <span class="sw" style="background:#e7d8c3"></span>
-        <span class="sw" style="background:#c9a15f"></span>
-        <span class="sw" style="background:#8a6b46"></span>
+        <div class="cd"><div class="n" id="d">—</div><div class="l" data-i18n="uDays">дней</div></div>
+        <div class="cd"><div class="n" id="h">—</div><div class="l" data-i18n="uHrs">часов</div></div>
+        <div class="cd"><div class="n" id="m">—</div><div class="l" data-i18n="uMin">минут</div></div>
+        <div class="cd"><div class="n" id="s">—</div><div class="l" data-i18n="uSec">секунд</div></div>
       </div>
     </div>
   </section>
 
   <!-- ══ ЛОКАЦИЯ ══ -->
   <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">Место проведения</div>
-      <h2 class="title">Как добраться</h2>
-      <div class="venue-name">Ресторан «Меридиана»</div>
-      <div class="addr">с. Мырза-Аке<br><span class="muted">(точный адрес уточняется)</span></div>
+    <div class="panel rise">
+      <h2 class="title" data-i18n="locTitle">Как добраться</h2>
+      <div class="venue-name" data-i18n="venue2">Ресторан «Меридиана»</div>
+      <div class="muted" style="margin-top:.3rem" data-i18n="place2">с. Мырза-Аке</div>
       <div class="mapbox">
         <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Карта"
           src="https://www.google.com/maps?q=%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5&z=13&output=embed"></iframe>
       </div>
-      <a class="send" href="https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9C%D0%B5%D1%80%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5"
-         target="_blank" rel="noopener" style="margin-top:1.3rem;padding:0 1.6rem">Открыть в картах</a>
-    </div>
-  </section>
-
-  <!-- ══ ЗАКЛЮЧЕНИЕ ══ -->
-  <section>
-    <div class="wrap frame rise">
-      <div class="eyebrow">С любовью</div>
-      <h2 class="title">Ждём вас!</h2>
-      <p class="lead">
-        Будем счастливы разделить этот особенный день вместе с вами.
-        До встречи на нашем торжестве!
-      </p>
-      <div class="rule" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.7 8.6 22 11.8 19.5 16.1 12 21 12 21z"/></svg>
-      </div>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9C%D0%B5%D1%80%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5"
+         target="_blank" rel="noopener" data-i18n="mapBtn">Открыть в картах</a>
     </div>
   </section>
 
@@ -421,29 +249,84 @@
 </main>
 
 <script>
-  // ───── легко менять ─────
-  var WEDDING  = new Date(2026, 7, 22, 17, 0, 0);  // 22 августа 2026, 17:00
+  var WEDDING = new Date(2026, 7, 22, 17, 0, 0);
 
-  // ───── открытие сердца ─────
-  (function(){
-    var seal=document.getElementById('seal'), heart=document.getElementById('heart'), opened=false;
-    function open(){
-      if(opened) return; opened=true;
-      heart.classList.add('open'); heart.classList.remove('pulse');
-      setTimeout(function(){ seal.classList.add('gone'); document.body.classList.remove('locked'); }, 850);
+  var I18N = {
+    ru:{
+      guests:"ДОРОГИЕ ГОСТИ!",
+      invite:"Приглашаем вас на торжество, посвящённое нашему бракосочетанию",
+      date:"22 08 2026",
+      names:"Акназар и Медина",
+      glad:"Мы будем искренне рады разделить этот день с вами",
+      startlabel:"Начало торжества",
+      venue:"Ресторан «Меридиана»", place:"с. Мырза-Аке",
+      progTitle:"Программа",
+      p1:"Сбор гостей", p2:"Начало торжества", p3:"Свадебный торт", p4:"Окончание вечера",
+      cdTitle:"До торжества", month:"Август 2026",
+      uDays:"дней", uHrs:"часов", uMin:"минут", uSec:"секунд",
+      locTitle:"Как добраться", venue2:"Ресторан «Меридиана»", place2:"с. Мырза-Аке",
+      mapBtn:"Открыть в картах",
+      wd:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
+    },
+    ky:{
+      guests:"УРМАТТУУ КОНОКТОР!",
+      invite:"Никебизге арналган салтанатка сиздерди чакырабыз",
+      date:"22 08 2026",
+      names:"Акназар жана Медина",
+      glad:"Бул күндү сиздер менен бөлүшүүгө чын жүрөктөн кубанычтабыз",
+      startlabel:"Салтанаттын башталышы",
+      venue:"«Меридиана» ресторан", place:"Мырза-Аке айылы",
+      progTitle:"Иш-чара",
+      p1:"Коноктордун жыйналышы", p2:"Салтанаттын башталышы", p3:"Той торту", p4:"Кеченин аякталышы",
+      cdTitle:"Салтанатка чейин", month:"2026-жыл, август",
+      uDays:"күн", uHrs:"саат", uMin:"мүнөт", uSec:"секунд",
+      locTitle:"Кантип жетесиз", venue2:"«Меридиана» ресторан", place2:"Мырза-Аке айылы",
+      mapBtn:"Картадан ачуу",
+      wd:["Дш","Шш","Шр","Бш","Жм","Иш","Жк"]
     }
-    heart.addEventListener('click', open);
-    heart.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }});
+  };
+
+  function applyLang(lang){
+    var t=I18N[lang];
+    document.documentElement.lang = (lang==="ky"?"ky":"ru");
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.getAttribute('data-i18n'); if(t[k]!=null) el.textContent=t[k];
+    });
+    // weekday headers
+    var row=document.getElementById('wdrow'); row.innerHTML='';
+    t.wd.forEach(function(w){ var th=document.createElement('th'); th.textContent=w; row.appendChild(th); });
+    document.getElementById('ky').classList.toggle('on', lang==='ky');
+    document.getElementById('ru').classList.toggle('on', lang==='ru');
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+  document.getElementById('ky').onclick=function(){ applyLang('ky'); };
+  document.getElementById('ru').onclick=function(){ applyLang('ru'); };
+
+  // календарь августа 2026
+  (function(){
+    var year=2026,month=7,mark=22;
+    var offset=(new Date(year,month,1).getDay()+6)%7;
+    var days=new Date(year,month+1,0).getDate();
+    var body=document.getElementById('calbody');
+    var row=document.createElement('tr'),c=0,i,day,td;
+    for(i=0;i<offset;i++){ row.appendChild(document.createElement('td')); c++; }
+    for(day=1;day<=days;day++){
+      td=document.createElement('td');
+      if(day===mark){ td.className='hi'; td.innerHTML='<span>'+day+'</span>'; } else td.textContent=day;
+      row.appendChild(td); c++;
+      if(c%7===0){ body.appendChild(row); row=document.createElement('tr'); }
+    }
+    if(c%7!==0) body.appendChild(row);
   })();
 
-  // ───── отсчёт ─────
+  // отсчёт
   (function(){
     var t=WEDDING.getTime();
     var D=document.getElementById('d'),H=document.getElementById('h'),M=document.getElementById('m'),S=document.getElementById('s');
     function p(n){return (n<10?'0':'')+n;}
     function tick(){
       var diff=t-Date.now();
-      if(diff<=0){ document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Great Vibes'"+',cursive;font-size:2rem;color:#a67c3d">Сегодня наш день &#9829;</div>'; return; }
+      if(diff<=0){ document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Marck Script'"+',cursive;font-size:1.7rem;color:#9c7f45">&#9829;</div>'; return; }
       var s=Math.floor(diff/1000);
       D.textContent=Math.floor(s/86400); H.textContent=p(Math.floor(s%86400/3600));
       M.textContent=p(Math.floor(s%3600/60)); S.textContent=p(s%60);
@@ -452,32 +335,17 @@
     tick();
   })();
 
-  // ───── календарь августа 2026 ─────
-  (function(){
-    var year=2026, month=7, mark=22;
-    var first=new Date(year,month,1).getDay();
-    var offset=(first+6)%7;
-    var days=new Date(year,month+1,0).getDate();
-    var body=document.getElementById('calbody');
-    var row=document.createElement('tr'), c=0, i, day, td;
-    for(i=0;i<offset;i++){ row.appendChild(document.createElement('td')); c++; }
-    for(day=1; day<=days; day++){
-      td=document.createElement('td');
-      if(day===mark){ td.className='hi'; td.innerHTML='<span>'+day+'</span>'; }
-      else td.textContent=day;
-      row.appendChild(td); c++;
-      if(c%7===0){ body.appendChild(row); row=document.createElement('tr'); }
-    }
-    if(c%7!==0) body.appendChild(row);
-  })();
-
-  // ───── появление при прокрутке ─────
+  // появление при прокрутке
   (function(){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('vis'); io.unobserve(en.target); }});
     },{threshold:.12});
     document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
   })();
+
+  // старт: сохранённый язык или русский
+  var saved='ru'; try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){}
+  applyLang(saved);
 </script>
 </body>
 </html>
