@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0c211c">
+<title>Акназар & Медина — Приглашение</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c211c; --bg2:#081712; --panel:#0f2a23;
+    --gold:#d9b876; --gold2:#c2a058; --cream:#f0e7d4;
+    --ink:#cdd8cf; --ink2:#8ea296; --line:rgba(217,184,118,.32);
+    --serif:'Cormorant Garamond',Georgia,serif; --script:'Marck Script',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--serif);color:var(--ink);line-height:1.6;overflow-x:hidden;
+    background:radial-gradient(130% 100% at 50% -10%,#123128,var(--bg) 55%,var(--bg2));
+    background-attachment:fixed;-webkit-font-smoothing:antialiased}
+  svg,img{max-width:100%;display:block}
+  .muted{color:var(--ink2)}
+  .lang{position:fixed;top:.9rem;right:.9rem;z-index:60;display:inline-flex;
+    background:rgba(15,42,35,.85);backdrop-filter:blur(6px);border:1px solid var(--line);
+    border-radius:999px;overflow:hidden}
+  .lang button{border:0;background:transparent;cursor:pointer;font-family:var(--serif);
+    font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);padding:.5rem .85rem}
+  .lang button.on{color:#0c211c;background:var(--gold)}
+  section{padding:clamp(3rem,9vw,5rem) 1.15rem;display:flex;justify-content:center}
+  .hero{min-height:100svh;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+  .corner{position:absolute;width:clamp(90px,26vw,170px);color:var(--gold);opacity:.55}
+  .c-tl{top:1.2rem;left:1.2rem} .c-br{bottom:1.2rem;right:1.2rem;transform:rotate(180deg)}
+  .hero-inner{position:relative;z-index:2;max-width:560px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.64rem,2.5vw,.76rem);color:var(--gold2)}
+  .body-txt{text-transform:uppercase;letter-spacing:.15em;font-size:clamp(.72rem,2.8vw,.84rem);color:var(--ink2);line-height:2;max-width:32ch;margin:1.1rem auto 0}
+  .names{font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--cream);
+    line-height:1.02;font-size:clamp(2.8rem,14vw,5rem);margin:.4rem 0 .1rem}
+  .names .amp{display:block;font-family:var(--script);text-transform:none;letter-spacing:0;
+    color:var(--gold);font-size:.38em;margin:.05em 0}
+  .date{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:1.4rem 0 1rem;
+    color:var(--gold);letter-spacing:.28em;font-size:clamp(1.05rem,4.4vw,1.4rem)}
+  .date::before,.date::after{content:"";height:1px;width:clamp(20px,9vw,50px);background:var(--line)}
+  .glad{text-transform:uppercase;letter-spacing:.14em;font-size:clamp(.72rem,2.8vw,.82rem);color:var(--ink2);line-height:1.95;max-width:30ch;margin:0 auto}
+  .details{margin-top:1.7rem;display:flex;flex-direction:column;gap:.35rem}
+  .details .row{font-size:clamp(1rem,4vw,1.2rem);color:var(--cream)}
+  .details .venue{color:var(--gold)}
+  .details .place{text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--ink2)}
+  .scrollcue{margin-top:2rem;color:var(--gold2);text-transform:uppercase;letter-spacing:.22em;font-size:.64rem}
+  .scrollcue svg{width:20px;height:20px;margin:.4rem auto 0;animation:bob 1.8s ease-in-out infinite}
+  .panel{width:min(100%,520px);background:linear-gradient(180deg,var(--panel),#0b201a);
+    border:1px solid var(--line);border-radius:2px;box-shadow:0 26px 55px -34px #000;
+    padding:clamp(2.25rem,8vw,3.25rem) clamp(1.5rem,7vw,2.75rem);text-align:center}
+  h2.title{font-family:var(--script);font-weight:400;color:var(--gold);font-size:clamp(2rem,8vw,2.7rem);margin:0 0 1.2rem}
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+  .cd{border:1px solid var(--line);border-radius:4px;padding:.85rem .2rem;background:rgba(217,184,118,.04)}
+  .cd .n{font-size:clamp(1.5rem,7vw,2.3rem);color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+  .cd .l{text-transform:uppercase;letter-spacing:.1em;font-size:.55rem;color:var(--ink2);margin-top:.45rem}
+  .venue-name{font-size:clamp(1.35rem,5.5vw,1.8rem);color:var(--gold)}
+  .mapbox{margin-top:1.2rem;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .mapbox iframe{width:100%;height:210px;border:0;display:block;filter:grayscale(.3) sepia(.3) brightness(.9)}
+  a.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;margin-top:1.1rem;
+    min-height:48px;padding:0 1.6rem;border-radius:3px;background:var(--gold);color:#0c211c;
+    font-size:.74rem;text-transform:uppercase;letter-spacing:.16em}
+  a.btn:active{transform:translateY(1px)}
+  footer{text-align:center;padding:2.25rem 1.15rem 3.25rem}
+  footer .fn{font-family:var(--script);font-size:1.8rem;color:var(--gold)}
+  footer .fd{letter-spacing:.24em;font-size:.76rem;margin-top:.3rem;color:var(--ink2)}
+  .rise{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rise.vis{opacity:1;transform:none}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{opacity:1;transform:none;transition:none}.scrollcue svg{animation:none}}
+</style>
+</head>
+<body>
+  <div class="lang" role="group" aria-label="Тил / Язык">
+    <button id="ky" type="button">Кыр</button><button id="ru" type="button">Рус</button>
+  </div>
+<main>
+  <section class="hero">
+    <svg class="corner c-tl" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 60 C6 30 30 6 60 6"/><path d="M18 60 C18 36 36 18 60 18"/>
+      <path d="M30 42 C24 34 24 26 30 20 C36 26 36 34 30 42Z" fill="currentColor" stroke="none" opacity=".8"/>
+      <path d="M42 30 C50 24 58 24 64 30 C58 36 50 36 42 30Z" fill="currentColor" stroke="none" opacity=".8"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="eyebrow" data-i18n="guests">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+      <h1 class="names">Акназар<span class="amp">and</span>Медина</h1>
+      <div class="date"><span data-i18n="date">22 08 2026</span></div>
+      <p class="glad" data-i18n="glad">Мы будем искренне рады разделить этот день с вами</p>
+      <div class="details">
+        <div class="row"><b>17:00</b> — <span data-i18n="startlabel">Начало торжества</span></div>
+        <div class="row venue" data-i18n="venue">Ресторан «Меридиана»</div>
+        <div class="place" data-i18n="place">с. Мырза-Аке</div>
+      </div>
+      <div class="scrollcue" data-i18n="scroll">Листайте вниз
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <svg class="corner c-br" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 60 C6 30 30 6 60 6"/><path d="M18 60 C18 36 36 18 60 18"/>
+      <path d="M30 42 C24 34 24 26 30 20 C36 26 36 34 30 42Z" fill="currentColor" stroke="none" opacity=".8"/>
+      <path d="M42 30 C50 24 58 24 64 30 C58 36 50 36 42 30Z" fill="currentColor" stroke="none" opacity=".8"/>
+    </svg>
+  </section>
+
+  <section><div class="panel rise">
+    <h2 class="title" data-i18n="cdTitle">До торжества</h2>
+    <div class="countdown" id="cd">
+      <div class="cd"><div class="n" id="d">—</div><div class="l" data-i18n="uDays">дней</div></div>
+      <div class="cd"><div class="n" id="h">—</div><div class="l" data-i18n="uHrs">часов</div></div>
+      <div class="cd"><div class="n" id="m">—</div><div class="l" data-i18n="uMin">минут</div></div>
+      <div class="cd"><div class="n" id="s">—</div><div class="l" data-i18n="uSec">секунд</div></div>
+    </div>
+  </div></section>
+
+  <section><div class="panel rise">
+    <h2 class="title" data-i18n="locTitle">Как добраться</h2>
+    <div class="venue-name" data-i18n="venue2">Ресторан «Меридиана»</div>
+    <div class="muted" style="margin-top:.3rem" data-i18n="place2">с. Мырза-Аке</div>
+    <div class="mapbox"><iframe loading="lazy" title="Карта" src="https://www.google.com/maps?q=%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5&z=13&output=embed"></iframe></div>
+    <a class="btn" target="_blank" rel="noopener" data-i18n="mapBtn" href="https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9C%D0%B5%D1%80%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5">Открыть в картах</a>
+  </div></section>
+
+  <footer><div class="fn">Акназар &amp; Медина</div><div class="fd">22.08.2026</div></footer>
+</main>
+<script>
+  var WEDDING=new Date(2026,7,22,17,0,0);
+  var I18N={
+    ru:{guests:"ПРИГЛАШЕНИЕ НА СВАДЬБУ",date:"22 08 2026",glad:"Мы будем искренне рады разделить этот день с вами",startlabel:"Начало торжества",venue:"Ресторан «Меридиана»",place:"с. Мырза-Аке",scroll:"Листайте вниз",cdTitle:"До торжества",uDays:"дней",uHrs:"часов",uMin:"минут",uSec:"секунд",locTitle:"Как добраться",venue2:"Ресторан «Меридиана»",place2:"с. Мырза-Аке",mapBtn:"Открыть в картах"},
+    ky:{guests:"ТОЙ ЧАКЫРУУ",date:"22 08 2026",glad:"Бул күндү сиздер менен бөлүшүүгө чын жүрөктөн кубанычтабыз",startlabel:"Салтанаттын башталышы",venue:"«Меридиана» ресторан",place:"Мырза-Аке айылы",scroll:"Төмөн жылдырыңыз",cdTitle:"Салтанатка чейин",uDays:"күн",uHrs:"саат",uMin:"мүнөт",uSec:"секунд",locTitle:"Кантип жетесиз",venue2:"«Меридиана» ресторан",place2:"Мырза-Аке айылы",mapBtn:"Картадан ачуу"}
+  };
+  function applyLang(l){var t=I18N[l];document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(t[k]!=null)e.textContent=t[k];});
+    ky.classList.toggle('on',l==='ky');ru.classList.toggle('on',l==='ru');try{localStorage.setItem('lang',l)}catch(e){}}
+  var ky=document.getElementById('ky'),ru=document.getElementById('ru');
+  ky.onclick=function(){applyLang('ky')};ru.onclick=function(){applyLang('ru')};
+  (function(){var t=WEDDING.getTime(),D=d,H=h,M=m,S=s;function p(n){return(n<10?'0':'')+n}
+    function tick(){var f=t-Date.now();if(f<=0){document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Marck Script'"+',cursive;font-size:1.8rem;color:#d9b876">&#9829;</div>';return}
+      var x=Math.floor(f/1000);D.textContent=Math.floor(x/86400);H.textContent=p(Math.floor(x%86400/3600));M.textContent=p(Math.floor(x%3600/60));S.textContent=p(x%60);setTimeout(tick,1000)}
+    var d=document.getElementById('d'),h=document.getElementById('h'),m=document.getElementById('m'),s=document.getElementById('s');tick();})();
+  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target)}})},{threshold:.12});document.querySelectorAll('.rise').forEach(function(e){io.observe(e)})})();
+  var sv='ru';try{sv=localStorage.getItem('lang')||'ru'}catch(e){}applyLang(sv);
+</script>
+</body>
+</html>

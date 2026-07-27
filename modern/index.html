@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f1eee6">
+<title>Акназар & Медина — Приглашение</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f1eee6; --ink:#26241f; --ink2:#6f6a5f; --sage:#7d876a; --sage2:#5f684d;
+    --line:rgba(38,36,31,.16); --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-weight:300}
+  svg,img{max-width:100%;display:block}
+  .muted{color:var(--ink2)}
+  .lang{position:fixed;top:1rem;right:1rem;z-index:60;display:inline-flex;gap:.2rem}
+  .lang button{border:1px solid var(--line);background:transparent;cursor:pointer;font-family:var(--sans);
+    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);padding:.45rem .7rem;border-radius:2px}
+  .lang button.on{color:#fff;background:var(--sage2);border-color:var(--sage2)}
+  .label{font-family:var(--sans);text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.6rem,2.4vw,.72rem);color:var(--sage2);font-weight:500}
+  section{padding:clamp(3rem,9vw,6rem) 1.5rem;max-width:720px;margin:0 auto}
+  /* hero */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+  .hero .top{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(2rem,7vw,3.5rem)}
+  .hero .top .ln{flex:1;height:1px;background:var(--line)}
+  .names{font-family:var(--serif);font-weight:600;line-height:.92;letter-spacing:-.01em;
+    font-size:clamp(3.6rem,20vw,8rem);text-transform:uppercase;color:var(--ink)}
+  .names .amp{display:block;font-weight:400;font-style:italic;text-transform:none;color:var(--sage2);
+    font-size:.42em;letter-spacing:0;margin:.05em 0 .05em}
+  .subline{margin-top:clamp(1.6rem,5vw,2.4rem);display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem 1.4rem}
+  .subline .big{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,7vw,2.4rem);letter-spacing:.04em}
+  .subline .tag{font-family:var(--sans);text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--ink2)}
+  .glad{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,4.6vw,1.5rem);color:var(--ink2);margin-top:2rem;max-width:24ch;line-height:1.5}
+  .scrollcue{margin-top:clamp(2.2rem,7vw,3.5rem);display:flex;align-items:center;gap:.6rem;color:var(--sage2);text-transform:uppercase;letter-spacing:.2em;font-size:.66rem}
+  .scrollcue svg{width:18px;height:18px;animation:bob 1.8s ease-in-out infinite}
+  /* blocks */
+  .block{border-top:1px solid var(--line);padding-top:clamp(2rem,6vw,3rem)}
+  .block h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,7vw,2.6rem);letter-spacing:.02em;margin:.6rem 0 1.6rem}
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.5rem,2vw,1.25rem)}
+  .cd .n{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,11vw,4rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+  .cd .l{text-transform:uppercase;letter-spacing:.16em;font-size:.6rem;color:var(--ink2);margin-top:.5rem}
+  .where{display:flex;flex-direction:column;gap:.4rem}
+  .where .v{font-family:var(--serif);font-size:clamp(1.5rem,6vw,2rem);color:var(--ink)}
+  .where .a{color:var(--ink2);letter-spacing:.04em}
+  .mapbox{margin-top:1.5rem;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+  .mapbox iframe{width:100%;height:230px;border:0;display:block;filter:grayscale(.35) contrast(.95)}
+  a.btn{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;margin-top:1.4rem;
+    font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.2em;color:var(--ink);
+    border-bottom:1px solid var(--sage2);padding-bottom:.35rem;width:max-content}
+  a.btn svg{width:15px;height:15px}
+  footer{max-width:720px;margin:0 auto;padding:clamp(2.5rem,7vw,4rem) 1.5rem 3.5rem;border-top:1px solid var(--line)}
+  footer .fn{font-family:var(--serif);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(1.4rem,6vw,2rem)}
+  footer .fd{font-family:var(--sans);letter-spacing:.24em;font-size:.72rem;margin-top:.4rem;color:var(--ink2)}
+  .rise{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rise.vis{opacity:1;transform:none}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{opacity:1;transform:none;transition:none}.scrollcue svg{animation:none}}
+</style>
+</head>
+<body>
+  <div class="lang" role="group" aria-label="Тил / Язык">
+    <button id="ky" type="button">KY</button><button id="ru" type="button">RU</button>
+  </div>
+<main>
+  <section class="hero">
+    <div class="top"><span class="label" data-i18n="guests">Приглашение на свадьбу</span><span class="ln"></span></div>
+    <h1 class="names">Акназар<span class="amp">and</span>Медина</h1>
+    <div class="subline">
+      <span class="big" data-i18n="date">22.08.2026</span>
+      <span class="tag" data-i18n="startlabel">17:00 · Начало торжества</span>
+    </div>
+    <p class="glad" data-i18n="glad">Мы будем искренне рады разделить этот день с вами</p>
+    <div class="scrollcue" data-i18n="scroll">Листайте вниз
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <section><div class="block rise">
+    <span class="label" data-i18n="cdLabel">Обратный отсчёт</span>
+    <h2 data-i18n="cdTitle">До торжества осталось</h2>
+    <div class="countdown" id="cd">
+      <div class="cd"><div class="n" id="d">—</div><div class="l" data-i18n="uDays">дней</div></div>
+      <div class="cd"><div class="n" id="h">—</div><div class="l" data-i18n="uHrs">часов</div></div>
+      <div class="cd"><div class="n" id="m">—</div><div class="l" data-i18n="uMin">минут</div></div>
+      <div class="cd"><div class="n" id="s">—</div><div class="l" data-i18n="uSec">секунд</div></div>
+    </div>
+  </div></section>
+
+  <section><div class="block rise">
+    <span class="label" data-i18n="locLabel">Место проведения</span>
+    <h2 data-i18n="locTitle">Как добраться</h2>
+    <div class="where">
+      <span class="v" data-i18n="venue">Ресторан «Меридиана»</span>
+      <span class="a" data-i18n="place">с. Мырза-Аке</span>
+    </div>
+    <div class="mapbox"><iframe loading="lazy" title="Карта" src="https://www.google.com/maps?q=%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5&z=13&output=embed"></iframe></div>
+    <a class="btn" target="_blank" rel="noopener" data-i18n="mapBtn" href="https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9C%D0%B5%D1%80%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%9C%D1%8B%D1%80%D0%B7%D0%B0-%D0%90%D0%BA%D0%B5">Открыть в картах
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+  </div></section>
+
+  <footer><div class="fn">Акназар — Медина</div><div class="fd">22.08.2026 · Мырза-Аке</div></footer>
+</main>
+<script>
+  var WEDDING=new Date(2026,7,22,17,0,0);
+  var I18N={
+    ru:{guests:"Приглашение на свадьбу",date:"22.08.2026",startlabel:"17:00 · Начало торжества",glad:"Мы будем искренне рады разделить этот день с вами",scroll:"Листайте вниз",cdLabel:"Обратный отсчёт",cdTitle:"До торжества осталось",uDays:"дней",uHrs:"часов",uMin:"минут",uSec:"секунд",locLabel:"Место проведения",locTitle:"Как добраться",venue:"Ресторан «Меридиана»",place:"с. Мырза-Аке",mapBtn:"Открыть в картах"},
+    ky:{guests:"Той чакыруу",date:"22.08.2026",startlabel:"17:00 · Салтанаттын башталышы",glad:"Бул күндү сиздер менен бөлүшүүгө чын жүрөктөн кубанычтабыз",scroll:"Төмөн жылдырыңыз",cdLabel:"Обратный отсчёт",cdTitle:"Салтанатка чейин калды",uDays:"күн",uHrs:"саат",uMin:"мүнөт",uSec:"секунд",locLabel:"Өткөрүлүүчү жер",locTitle:"Кантип жетесиз",venue:"«Меридиана» ресторан",place:"Мырза-Аке айылы",mapBtn:"Картадан ачуу"}
+  };
+  function applyLang(l){var t=I18N[l];document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(t[k]!=null)e.textContent=t[k];});
+    ky.classList.toggle('on',l==='ky');ru.classList.toggle('on',l==='ru');try{localStorage.setItem('lang',l)}catch(e){}}
+  var ky=document.getElementById('ky'),ru=document.getElementById('ru');
+  ky.onclick=function(){applyLang('ky')};ru.onclick=function(){applyLang('ru')};
+  (function(){var t=WEDDING.getTime();var d=document.getElementById('d'),h=document.getElementById('h'),m=document.getElementById('m'),s=document.getElementById('s');function p(n){return(n<10?'0':'')+n}
+    function tick(){var f=t-Date.now();if(f<=0){document.getElementById('cd').innerHTML='<div style="grid-column:1/-1;font-family:'+"'Cormorant Garamond'"+',serif;font-style:italic;font-size:2rem;color:#5f684d">Сегодня наш день</div>';return}
+      var x=Math.floor(f/1000);d.textContent=Math.floor(x/86400);h.textContent=p(Math.floor(x%86400/3600));m.textContent=p(Math.floor(x%3600/60));s.textContent=p(x%60);setTimeout(tick,1000)}tick();})();
+  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target)}})},{threshold:.12});document.querySelectorAll('.rise').forEach(function(e){io.observe(e)})})();
+  var sv='ru';try{sv=localStorage.getItem('lang')||'ru'}catch(e){}applyLang(sv);
+</script>
+</body>
+</html>
