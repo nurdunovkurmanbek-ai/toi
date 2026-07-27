@@ -82,6 +82,11 @@
   .details .venue{ color:var(--gold-2); }
   .details .note{ font-style:italic; font-size:.85rem; color:var(--ink-2); margin-top:.15rem; }
 
+  /* персональное приветствие с именем гостя */
+  .greeting{ margin-top:1rem; display:flex; flex-direction:column; align-items:center; gap:.15rem; }
+  .greeting .hello{ text-transform:uppercase; letter-spacing:.24em; font-size:clamp(.68rem,2.7vw,.8rem); color:var(--ink-2); }
+  .greeting .guest{ font-family:var(--script); color:var(--gold-2); line-height:1.15; font-size:clamp(1.7rem,8vw,2.6rem); }
+
   /* ─── secondary panels ─── */
   .panel{
     width:min(100%,520px); background:var(--card); border:1px solid var(--line); border-radius:2px;
@@ -190,8 +195,12 @@
         <path d="M394 28 C388 16 390 6 400 2 C404 12 402 22 394 28Z" opacity=".8"/>
       </svg>
 
-      <div class="eyebrow" data-i18n="guests">ДОРОГИЕ ГОСТИ!</div>
-      <p class="body-txt" data-i18n="invite">Приглашаем вас на торжество, посвящённое нашему бракосочетанию</p>
+      <div class="eyebrow" data-i18n="invtitle">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+      <div class="greeting">
+        <span class="hello" data-i18n="hello">Урматтуу</span>
+        <span class="guest" id="guest">Дорогие гости</span>
+      </div>
+      <p class="body-txt" data-i18n="invite">сиздерди үйлөнүү тоюбузга чакырабыз!</p>
 
       <div class="date"><span data-i18n="date">22 08 2026</span></div>
 
@@ -256,10 +265,10 @@
 
   var I18N = {
     ru:{
-      guests:"ДОРОГИЕ ГОСТИ!",
-      invite:"Приглашаем вас на торжество, посвящённое нашему бракосочетанию",
+      invtitle:"ПРИГЛАШЕНИЕ НА СВАДЬБУ", hello:"Дорогие", guestsFallback:"гости",
+      invite:"приглашаем вас разделить с нами радость этого дня!",
       date:"22 08 2026", names:"Акназар и Медина",
-      glad:"Мы будем искренне рады разделить этот день с вами",
+      glad:"Мы будем искренне рады видеть вас на нашем празднике",
       startlabel:"Начало торжества", venue:"Ресторан «Меридиана»", place:"с. Мырза-Аке",
       cdTitle:"До торжества", month:"Август 2026",
       uDays:"дней", uHrs:"часов", uMin:"минут", uSec:"секунд",
@@ -268,10 +277,10 @@
       wd:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
     },
     ky:{
-      guests:"УРМАТТУУ КОНОКТОР!",
-      invite:"Никебизге арналган салтанатка сиздерди чакырабыз",
+      invtitle:"ТОЙ ЧАКЫРУУ", hello:"Урматтуу", guestsFallback:"коноктор",
+      invite:"сиздерди үйлөнүү тоюбуздун кубанычын бөлүшүүгө чакырабыз!",
       date:"22 08 2026", names:"Акназар жана Медина",
-      glad:"Бул күндү сиздер менен бөлүшүүгө чын жүрөктөн кубанычтабыз",
+      glad:"Сиздерди тоюбузда көргөнгө чын жүрөктөн кубанычтабыз",
       startlabel:"Салтанаттын башталышы", venue:"«Меридиана» ресторан", place:"Мырза-Аке айылы",
       cdTitle:"Салтанатка чейин", month:"2026-жыл, август",
       uDays:"күн", uHrs:"саат", uMin:"мүнөт", uSec:"секунд",
@@ -281,12 +290,17 @@
     }
   };
 
+  // имя гостя из ссылки: ?to=Мухаммедазиз Айбийке
+  var GUEST=(function(){ try{ var p=new URLSearchParams(location.search);
+    return (p.get('to')||p.get('guest')||'').trim(); }catch(e){ return ''; } })();
+
   function applyLang(lang){
     var t=I18N[lang];
     document.documentElement.lang=(lang==='ky'?'ky':'ru');
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k=el.getAttribute('data-i18n'); if(t[k]!=null) el.textContent=t[k];
     });
+    document.getElementById('guest').textContent = GUEST || t.guestsFallback;
     var row=document.getElementById('wdrow'); row.innerHTML='';
     t.wd.forEach(function(w){ var th=document.createElement('th'); th.textContent=w; row.appendChild(th); });
     document.getElementById('ky').classList.toggle('on', lang==='ky');
