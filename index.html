@@ -197,7 +197,7 @@
 
       <div class="eyebrow" data-i18n="invtitle">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
       <div class="greeting">
-        <span class="hello" data-i18n="hello">Урматтуу</span>
+        <span class="hello" id="hello">Урматтуу</span>
         <span class="guest" id="guest">Дорогие гости</span>
       </div>
       <p class="body-txt" data-i18n="invite">сиздерди үйлөнүү тоюбузга чакырабыз!</p>
@@ -290,9 +290,12 @@
     }
   };
 
-  // имя гостя из ссылки: ?to=Мухаммедазиз Айбийке
+  // имя гостя из ссылки: ?to=Имя ; форма приветствия: ?g=m|f|p
   var GUEST=(function(){ try{ var p=new URLSearchParams(location.search);
     return (p.get('to')||p.get('guest')||'').trim(); }catch(e){ return ''; } })();
+  var GFORM=(function(){ try{ var g=(new URLSearchParams(location.search).get('g')||'').toLowerCase();
+    return (g==='m'||g==='f'||g==='p')?g:'p'; }catch(e){ return 'p'; } })();
+  function helloWord(lang){ if(lang==='ky') return 'Урматтуу'; return {p:'Дорогие',m:'Дорогой',f:'Дорогая'}[GFORM]||'Дорогие'; }
 
   function applyLang(lang){
     var t=I18N[lang];
@@ -300,6 +303,7 @@
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k=el.getAttribute('data-i18n'); if(t[k]!=null) el.textContent=t[k];
     });
+    document.getElementById('hello').textContent = helloWord(lang);
     document.getElementById('guest').textContent = GUEST || t.guestsFallback;
     var row=document.getElementById('wdrow'); row.innerHTML='';
     t.wd.forEach(function(w){ var th=document.createElement('th'); th.textContent=w; row.appendChild(th); });

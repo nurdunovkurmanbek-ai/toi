@@ -31,6 +31,9 @@
   .seg button{border:0;background:transparent;cursor:pointer;font-family:var(--serif);font-size:.82rem;
     letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);padding:.5rem 1.1rem}
   .seg button.on{color:#fff;background:var(--olive)}
+  #segG{display:flex;width:100%;border-radius:6px}
+  #segG button{flex:1;padding:.6rem .35rem;font-size:.72rem;line-height:1.2;text-align:center}
+  #segG button+button{border-left:1px solid var(--line)}
 
   .out{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.4rem}
   .preview{background:#f6f2ea;border:1px dashed var(--line);border-radius:6px;padding:1.1rem;text-align:center;margin-bottom:1.2rem}
@@ -58,6 +61,13 @@
 
     <label for="name" id="lb-name">Коноктун аты</label>
     <input type="text" id="name" autocomplete="off" autofocus>
+
+    <label id="lb-recip" style="margin-top:1.1rem">Кимге?</label>
+    <div class="seg" id="segG">
+      <button type="button" data-g="p" class="on" id="g-p">Бир нече кишиге</button>
+      <button type="button" data-g="m" id="g-m">Эркек кишиге</button>
+      <button type="button" data-g="f" id="g-f">Аял кишиге</button>
+    </div>
 
     <label id="lb-lang" style="margin-top:1.1rem">Тил</label>
     <div class="seg" id="seg">
@@ -96,34 +106,39 @@
   var UI={
     ky:{title:"Чакыруу шилтемеси",sub:"Коноктун атын жазыңыз — даяр шилтеме чыгат",
         nameLabel:"Коноктун аты",placeholder:"Мисалы: Мухаммедазиз Айбийке",langLabel:"Тил",
+        recipLabel:"Кимге?",recipP:"Бир нече кишиге",recipM:"Эркек кишиге",recipF:"Аял кишиге",
         wa:"WhatsApp менен жиберүү",copy:"Шилтемени көчүрүү",openb:"Ачып көрүү",copied:"Көчүрүлдү ✓",
-        hello:"УРМАТТУУ",fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!",
-        waMsgHello:"Урматтуу ",waMsg:"Сиздерди тоюбузга чакырабыз 💛"},
+        fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!",
+        waMsg:"Сиздерди тоюбузга чакырабыз 💛"},
     ru:{title:"Ссылка-приглашение",sub:"Впишите имя гостя — получите готовую ссылку",
         nameLabel:"Имя гостя",placeholder:"Например: Мухаммедазиз Айбийке",langLabel:"Язык",
+        recipLabel:"Кому",recipP:"Нескольким",recipM:"Мужчине",recipF:"Женщине",
         wa:"Отправить в WhatsApp",copy:"Скопировать ссылку",openb:"Открыть",copied:"Скопировано ✓",
-        hello:"ДОРОГИЕ",fallback:"гости",text:"приглашаем вас на нашу свадьбу!",
-        waMsgHello:"Дорогие ",waMsg:"Приглашаем вас на нашу свадьбу 💛"}
+        fallback:"гости",text:"приглашаем вас на нашу свадьбу!",
+        waMsg:"Приглашаем вас на нашу свадьбу 💛"}
   };
-  var lang="ky", currentUrl=BASE;
+  // приветствие: киргизча всегда «Урматтуу», русское зависит от адресата
+  function helloWord(l,g){ if(l==='ky') return 'Урматтуу'; return {p:'Дорогие',m:'Дорогой',f:'Дорогая'}[g]||'Дорогие'; }
+
+  var lang="ky", gform="p", currentUrl=BASE;
   var $=function(id){return document.getElementById(id);};
   var nameEl=$('name'), waEl=$('wa'), openEl=$('open'),
       pvHello=$('pv-hello'), pvName=$('pv-name'), pvText=$('pv-text');
 
   function render(){
     var name=nameEl.value.trim(), t=UI[lang];
-    // интерфейс
     document.documentElement.lang=lang;
     $('ttl').textContent=t.title; $('sub').textContent=t.sub;
     $('lb-name').textContent=t.nameLabel; nameEl.placeholder=t.placeholder;
     $('lb-lang').textContent=t.langLabel;
+    $('lb-recip').textContent=t.recipLabel;
+    $('g-p').textContent=t.recipP; $('g-m').textContent=t.recipM; $('g-f').textContent=t.recipF;
     $('lb-wa').textContent=t.wa; $('lb-copy').textContent=t.copy; $('lb-open').textContent=t.openb;
-    // превью
-    pvHello.textContent=t.hello; pvName.textContent=name||t.fallback; pvText.textContent=t.text;
-    // ссылки
-    currentUrl=BASE+"?lang="+lang+(name ? "&to="+encodeURIComponent(name) : "");
+    var hw=helloWord(lang,gform);
+    pvHello.textContent=hw; pvName.textContent=name||t.fallback; pvText.textContent=t.text;
+    currentUrl=BASE+"?lang="+lang+"&g="+gform+(name ? "&to="+encodeURIComponent(name) : "");
     openEl.href=currentUrl;
-    var msg=(name ? (t.waMsgHello+name+"! ") : "")+t.waMsg+"\n"+currentUrl;
+    var msg=(name ? (hw+" "+name+"! ") : "")+t.waMsg+"\n"+currentUrl;
     waEl.href="https://wa.me/?text="+encodeURIComponent(msg);
   }
   nameEl.addEventListener('input', render);
@@ -133,6 +148,14 @@
     b.addEventListener('click', function(){
       lang=b.getAttribute('data-l');
       segBtns.forEach(function(x){ x.classList.toggle('on', x===b); });
+      render();
+    });
+  });
+  var segG=document.querySelectorAll('#segG button');
+  segG.forEach(function(b){
+    b.addEventListener('click', function(){
+      gform=b.getAttribute('data-g');
+      segG.forEach(function(x){ x.classList.toggle('on', x===b); });
       render();
     });
   });
