@@ -33,13 +33,10 @@
   .seg button.on{color:#fff;background:var(--olive)}
 
   .out{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.4rem}
-  .preview{background:#f6f2ea;border:1px dashed var(--line);border-radius:6px;padding:1rem;text-align:center;margin-bottom:1.1rem}
+  .preview{background:#f6f2ea;border:1px dashed var(--line);border-radius:6px;padding:1.1rem;text-align:center;margin-bottom:1.2rem}
   .preview .h{text-transform:uppercase;letter-spacing:.2em;font-size:.66rem;color:var(--ink2)}
   .preview .g{font-family:var(--script);color:var(--gold2);font-size:clamp(1.6rem,8vw,2.2rem);line-height:1.1;margin:.15rem 0}
   .preview .t{font-size:.92rem;color:var(--ink);letter-spacing:.01em}
-  .linkbox{display:flex;align-items:center;gap:.5rem;background:#f2eee6;border:1px solid var(--line);border-radius:6px;padding:.6rem .75rem;margin-bottom:.9rem}
-  .linkbox input{flex:1;border:0;background:transparent;font-family:var(--serif);font-size:.9rem;color:var(--ink2);min-width:0}
-  .linkbox input:focus{outline:none}
   .btns{display:flex;flex-direction:column;gap:.6rem}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;text-decoration:none;cursor:pointer;
     min-height:52px;border-radius:5px;font-family:var(--serif);font-size:.86rem;text-transform:uppercase;letter-spacing:.12em;border:1px solid transparent}
@@ -48,7 +45,6 @@
   .btn-copy{background:var(--gold);color:#fff}
   .btn-open{background:transparent;color:var(--ink);border-color:var(--line)}
   .btn:active{transform:translateY(1px)}
-  .hint{margin-top:1.2rem;font-size:.82rem;color:var(--ink2);text-align:center;line-height:1.6}
   .toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%) translateY(20px);opacity:0;
     background:var(--ink);color:#fff;padding:.65rem 1.2rem;border-radius:999px;font-size:.85rem;letter-spacing:.03em;
     transition:opacity .25s ease,transform .25s ease;pointer-events:none;z-index:10}
@@ -58,17 +54,15 @@
 <body>
   <div class="card">
     <h1>Чакыруу шилтемеси</h1>
-    <p class="sub">Конактын атын жазыңыз — даяр шилтеме чыгат</p>
+    <p class="sub">Коноктун атын жазыңыз — даяр шилтеме чыгат</p>
 
-    <label for="name">Конактын аты</label>
+    <label for="name">Коноктун аты</label>
     <input type="text" id="name" placeholder="Мисалы: Мухаммедазиз Айбийке" autocomplete="off" autofocus>
 
-    <div>
-      <label style="margin-top:1.1rem">Тил</label>
-      <div class="seg" id="seg">
-        <button type="button" data-l="ky" class="on">Кыргызча</button>
-        <button type="button" data-l="ru">Русский</button>
-      </div>
+    <label style="margin-top:1.1rem">Тил</label>
+    <div class="seg" id="seg">
+      <button type="button" data-l="ky" class="on">Кыргызча</button>
+      <button type="button" data-l="ru">Русский</button>
     </div>
 
     <div class="out">
@@ -78,14 +72,12 @@
         <div class="t" id="pv-text">сиздерди үйлөнүү тоюбузга чакырабыз!</div>
       </div>
 
-      <div class="linkbox"><input type="text" id="link" readonly></div>
-
       <div class="btns">
         <a class="btn btn-wa" id="wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 5-1.3A10 10 0 1012 2zm0 2a8 8 0 11-4.2 14.8l-.3-.2-2.9.8.8-2.9-.2-.3A8 8 0 0112 4zm4.5 9.7c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.6.8-.8 1c-.1.1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.8.8-1 1.9-.6 3.1a11 11 0 004.4 4.4c1.6.8 2.3.7 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2z"/></svg>
           WhatsApp менен жиберүү
         </a>
-        <button class="btn btn-copy" id="copy">
+        <button class="btn btn-copy" id="copy" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
           Шилтемени көчүрүү
         </button>
@@ -95,8 +87,6 @@
         </a>
       </div>
     </div>
-
-    <p class="hint">Ар бир конок үчүн атты алмаштырып, кайра жибере бериңиз.<br>Ат бош болсо — «Урматтуу коноктор» деп жалпы чыгат.</p>
   </div>
 
   <div class="toast" id="toast">Көчүрүлдү ✓</div>
@@ -107,39 +97,39 @@
     ky:{hello:"УРМАТТУУ",fallback:"коноктор",text:"сиздерди үйлөнүү тоюбузга чакырабыз!"},
     ru:{hello:"ДОРОГИЕ",fallback:"гости",text:"приглашаем вас на нашу свадьбу!"}
   };
-  var lang='ky';
-  var nameEl=document.getElementById('name'),linkEl=document.getElementById('link'),
-      wa=document.getElementById('wa'),open=document.getElementById('open'),
-      pvHello=document.getElementById('pv-hello'),pvName=document.getElementById('pv-name'),pvText=document.getElementById('pv-text');
+  var lang="ky", currentUrl=BASE;
+  var nameEl=document.getElementById('name'),
+      waEl=document.getElementById('wa'), openEl=document.getElementById('open'),
+      pvHello=document.getElementById('pv-hello'), pvName=document.getElementById('pv-name'), pvText=document.getElementById('pv-text');
 
   function render(){
-    var name=nameEl.value.trim();
-    var t=T[lang];
-    var url=BASE+"?lang="+lang+(name?("&to="+encodeURIComponent(name)):"");
-    linkEl.value=url;
-    open.href=url;
-    pvHello.textContent=t.hello;
-    pvName.textContent=name||t.fallback;
-    pvText.textContent=t.text;
-    var msg=(name?("Урматтуу "+name+"! "):"")+"Сиздерди тоюбузга чакырабыз 💛\n"+url;
-    wa.href="https://wa.me/?text="+encodeURIComponent(msg);
+    var name=nameEl.value.trim(), t=T[lang];
+    currentUrl = BASE+"?lang="+lang+(name ? "&to="+encodeURIComponent(name) : "");
+    openEl.href = currentUrl;
+    pvHello.textContent = t.hello;
+    pvName.textContent  = name || t.fallback;
+    pvText.textContent  = t.text;
+    var msg=(name ? ("Урматтуу "+name+"! ") : "")+"Сиздерди тоюбузга чакырабыз 💛\n"+currentUrl;
+    waEl.href = "https://wa.me/?text="+encodeURIComponent(msg);
   }
-  nameEl.addEventListener('input',render);
+  nameEl.addEventListener('input', render);
 
-  document.getElementById('seg').addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    lang=b.getAttribute('data-l');
-    Array.prototype.forEach.call(this.children,function(x){ x.classList.toggle('on',x===b); });
-    render();
+  var segBtns = document.querySelectorAll('#seg button');
+  segBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      lang = b.getAttribute('data-l');
+      segBtns.forEach(function(x){ x.classList.toggle('on', x===b); });
+      render();
+    });
   });
 
   var toast=document.getElementById('toast');
-  function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1600); }
-  document.getElementById('copy').addEventListener('click',function(){
-    var v=linkEl.value;
+  function showToast(m){ toast.textContent=m; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},1600); }
+  document.getElementById('copy').addEventListener('click', function(){
     function ok(){ showToast("Көчүрүлдү ✓"); }
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(v).then(ok).catch(function(){ linkEl.select();document.execCommand('copy');ok(); }); }
-    else{ linkEl.select();document.execCommand('copy');ok(); }
+    function fallbackCopy(){ var i=document.createElement('input'); i.value=currentUrl; document.body.appendChild(i); i.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(i); ok(); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(currentUrl).then(ok).catch(fallbackCopy); }
+    else fallbackCopy();
   });
 
   render();
