@@ -369,7 +369,7 @@
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
     if(reduce) return;
     var active=false, last=null, pos=0, raf=null, resumeTimer=null;
-    function speed(){ return window.innerHeight/4; }   // ~4 секунды на один экран
+    function speed(){ return window.innerHeight/3; }   // ~3 секунды на один экран
     function atBottom(){ return (window.innerHeight+window.scrollY) >= (document.body.scrollHeight-2); }
     function step(ts){
       if(!active) return;
