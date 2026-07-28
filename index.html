@@ -38,6 +38,14 @@
     letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding:.45rem .8rem; }
   .lang button.on{ color:#fff; background:var(--gold); }
 
+  .music{ position:fixed; left:.9rem; bottom:.9rem; z-index:60; display:inline-flex; align-items:center; justify-content:center;
+    width:46px; height:46px; background:rgba(253,253,251,.9); backdrop-filter:blur(6px); border:1px solid var(--line);
+    border-radius:999px; cursor:pointer; color:var(--gold); }
+  .music svg{ width:22px; height:22px; }
+  .music.pulse{ animation:mpulse 2.2s ease-in-out infinite; }
+  @keyframes mpulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(169,131,74,.45); } 50%{ box-shadow:0 0 0 9px rgba(169,131,74,0); } }
+  #ytp{ position:fixed; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
+
   section{ padding:clamp(2.5rem,8vw,4.5rem) 1.15rem; display:flex; justify-content:center; }
   .hero{ padding-top:clamp(2rem,7vw,4rem); position:relative; }
   .peony{ position:absolute; z-index:3; pointer-events:none; filter:drop-shadow(0 10px 16px rgba(90,80,60,.16)); }
@@ -139,6 +147,9 @@
     <button id="ru" type="button">Рус</button>
   </div>
 
+  <button class="music pulse" id="music" type="button" aria-label="Музыка"></button>
+  <div id="ytp"></div>
+
 <main>
   <section class="hero">
     <svg class="peony peony-tl" viewBox="0 0 220 200" aria-hidden="true">
@@ -188,11 +199,6 @@
         <div class="venue" data-i18n="venue">«Меридиана» ресторан</div>
         <div class="place" data-i18n="place">Мырза-Аке айылы</div>
       </div>
-
-      <a class="btn" href="https://go.2gis.com/PXb93" target="_blank" rel="noopener" data-i18n="addressBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Дарек
-      </a>
 
       <div class="sign">
         <div class="with" data-i18n="signWith">Сиздерди урматтоо менен,</div>
@@ -334,6 +340,45 @@
   var saved = (urlLang==='ky'||urlLang==='ru') ? urlLang : 'ru';
   if(!(urlLang==='ky'||urlLang==='ru')){ try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){} }
   applyLang(saved);
+
+  /* ───── музыка (YouTube, тихо) ───── */
+  var ICON_ON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 010 7M18.5 6a7 7 0 010 12"/></svg>';
+  var ICON_OFF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>';
+  var musicBtn=document.getElementById('music'); musicBtn.innerHTML=ICON_OFF;
+  var ytPlayer=null, musicOn=false, VOL=20;
+  function setIcon(){ musicBtn.innerHTML=musicOn?ICON_ON:ICON_OFF; }
+  function playMusic(){ if(!ytPlayer||musicOn) return; try{ ytPlayer.setVolume(VOL); ytPlayer.playVideo(); musicOn=true; musicBtn.classList.remove('pulse'); setIcon(); }catch(e){} }
+  function pauseMusic(){ if(!ytPlayer||!musicOn) return; try{ ytPlayer.pauseVideo(); }catch(e){} musicOn=false; setIcon(); }
+  window.onYouTubeIframeAPIReady=function(){
+    ytPlayer=new YT.Player('ytp',{ videoId:'Y7dBGjXtLT4',
+      playerVars:{ autoplay:0, controls:0, loop:1, playlist:'Y7dBGjXtLT4', playsinline:1 },
+      events:{ onReady:function(){ try{ ytPlayer.setVolume(VOL); }catch(e){} } } });
+  };
+  musicBtn.addEventListener('click', function(e){ e.stopPropagation(); if(musicOn) pauseMusic(); else playMusic(); });
+  // первое касание где угодно — запускаем музыку
+  function firstTouch(){ playMusic(); document.removeEventListener('click',firstTouch); document.removeEventListener('touchstart',firstTouch); }
+  document.addEventListener('click', firstTouch);
+  document.addEventListener('touchstart', firstTouch, {passive:true});
+
+  /* ───── медленная авто-прокрутка сверху вниз ───── */
+  (function(){
+    var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+    if(reduce) return;
+    var speed=42, active=false, last=null, pos=0, raf=null;
+    function step(ts){
+      if(!active) return;
+      if(last==null) last=ts;
+      pos += speed*((ts-last)/1000); last=ts;
+      window.scrollTo(0,pos);
+      if((window.innerHeight+window.scrollY) >= (document.body.scrollHeight-2)){ active=false; return; }
+      raf=requestAnimationFrame(step);
+    }
+    function start(){ if(active) return; pos=window.scrollY; last=null; active=true; raf=requestAnimationFrame(step); }
+    function stop(){ active=false; if(raf) cancelAnimationFrame(raf); }
+    ['wheel','touchmove','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev, stop, {passive:true}); });
+    setTimeout(start, 2600);
+  })();
 </script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
