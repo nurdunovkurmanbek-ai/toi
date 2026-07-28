@@ -346,30 +346,35 @@
   var ICON_OFF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>';
   var musicBtn=document.getElementById('music'); musicBtn.innerHTML=ICON_OFF;
   var ytPlayer=null, musicOn=false, VOL=20;
-  function setIcon(){ musicBtn.innerHTML=musicOn?ICON_ON:ICON_OFF; }
-  function playMusic(){ if(!ytPlayer||musicOn) return; try{ ytPlayer.setVolume(VOL); ytPlayer.playVideo(); musicOn=true; musicBtn.classList.remove('pulse'); setIcon(); }catch(e){} }
-  function pauseMusic(){ if(!ytPlayer||!musicOn) return; try{ ytPlayer.pauseVideo(); }catch(e){} musicOn=false; setIcon(); }
+  function setIcon(){ musicBtn.innerHTML=musicOn?ICON_ON:ICON_OFF; if(musicOn) musicBtn.classList.remove('pulse'); }
+  function playMusic(){ if(!ytPlayer) return; try{ ytPlayer.setVolume(VOL); ytPlayer.unMute&&ytPlayer.unMute(); ytPlayer.playVideo(); }catch(e){} }
+  function pauseMusic(){ if(!ytPlayer) return; try{ ytPlayer.pauseVideo(); }catch(e){} }
   window.onYouTubeIframeAPIReady=function(){
     ytPlayer=new YT.Player('ytp',{ videoId:'Y7dBGjXtLT4',
-      playerVars:{ autoplay:0, controls:0, loop:1, playlist:'Y7dBGjXtLT4', playsinline:1 },
-      events:{ onReady:function(){ try{ ytPlayer.setVolume(VOL); }catch(e){} } } });
+      playerVars:{ autoplay:1, controls:0, loop:1, playlist:'Y7dBGjXtLT4', playsinline:1 },
+      events:{
+        onReady:function(){ try{ ytPlayer.setVolume(VOL); ytPlayer.playVideo(); }catch(e){} },
+        onStateChange:function(ev){ musicOn=(ev.data===1); setIcon(); }  // 1 = playing
+      } });
   };
   musicBtn.addEventListener('click', function(e){ e.stopPropagation(); if(musicOn) pauseMusic(); else playMusic(); });
-  // первое касание где угодно — запускаем музыку
-  function firstTouch(){ playMusic(); document.removeEventListener('click',firstTouch); document.removeEventListener('touchstart',firstTouch); }
+  // резерв: если автозапуск заблокирован — включаем при первом касании
+  function firstTouch(){ if(!musicOn) playMusic(); }
   document.addEventListener('click', firstTouch);
   document.addEventListener('touchstart', firstTouch, {passive:true});
+  document.addEventListener('scroll', firstTouch, {passive:true, once:true});
 
   /* ───── медленная авто-прокрутка: пауза при касании, продолжение после отпускания ───── */
   (function(){
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
     if(reduce) return;
-    var speed=42, active=false, last=null, pos=0, raf=null, resumeTimer=null;
+    var active=false, last=null, pos=0, raf=null, resumeTimer=null;
+    function speed(){ return window.innerHeight/4; }   // ~4 секунды на один экран
     function atBottom(){ return (window.innerHeight+window.scrollY) >= (document.body.scrollHeight-2); }
     function step(ts){
       if(!active) return;
       if(last==null) last=ts;
-      pos += speed*((ts-last)/1000); last=ts;
+      pos += speed()*((ts-last)/1000); last=ts;
       window.scrollTo(0,pos);
       if(atBottom()){ active=false; return; }   // дошли до низа — стоп
       raf=requestAnimationFrame(step);
