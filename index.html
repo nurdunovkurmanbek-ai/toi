@@ -360,22 +360,34 @@
   document.addEventListener('click', firstTouch);
   document.addEventListener('touchstart', firstTouch, {passive:true});
 
-  /* ───── медленная авто-прокрутка сверху вниз ───── */
+  /* ───── медленная авто-прокрутка: пауза при касании, продолжение после отпускания ───── */
   (function(){
     var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
     if(reduce) return;
-    var speed=42, active=false, last=null, pos=0, raf=null;
+    var speed=42, active=false, last=null, pos=0, raf=null, resumeTimer=null;
+    function atBottom(){ return (window.innerHeight+window.scrollY) >= (document.body.scrollHeight-2); }
     function step(ts){
       if(!active) return;
       if(last==null) last=ts;
       pos += speed*((ts-last)/1000); last=ts;
       window.scrollTo(0,pos);
-      if((window.innerHeight+window.scrollY) >= (document.body.scrollHeight-2)){ active=false; return; }
+      if(atBottom()){ active=false; return; }   // дошли до низа — стоп
       raf=requestAnimationFrame(step);
     }
-    function start(){ if(active) return; pos=window.scrollY; last=null; active=true; raf=requestAnimationFrame(step); }
-    function stop(){ active=false; if(raf) cancelAnimationFrame(raf); }
-    ['wheel','touchmove','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev, stop, {passive:true}); });
+    function start(){ if(active||atBottom()) return; pos=window.scrollY; last=null; active=true; raf=requestAnimationFrame(step); }
+    function pause(){ active=false; if(raf){ cancelAnimationFrame(raf); raf=null; } }
+    function clearResume(){ if(resumeTimer){ clearTimeout(resumeTimer); resumeTimer=null; } }
+    function scheduleResume(){ clearResume(); resumeTimer=setTimeout(start, 1200); }
+    // держит палец / кнопку — пауза (и не возобновляем, пока держит)
+    window.addEventListener('touchstart', function(){ pause(); clearResume(); }, {passive:true});
+    window.addEventListener('touchmove',  function(){ pause(); clearResume(); }, {passive:true});
+    window.addEventListener('mousedown',  function(){ pause(); clearResume(); });
+    // отпустил — через паузу продолжаем вниз
+    window.addEventListener('touchend', scheduleResume, {passive:true});
+    window.addEventListener('mouseup',  scheduleResume);
+    // колесо/клавиши — пауза, затем продолжение
+    window.addEventListener('wheel',   function(){ pause(); scheduleResume(); }, {passive:true});
+    window.addEventListener('keydown', function(){ pause(); scheduleResume(); });
     setTimeout(start, 2600);
   })();
 </script>
