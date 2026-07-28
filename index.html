@@ -52,6 +52,19 @@
   @keyframes mpulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(178,141,75,.45); } 50%{ box-shadow:0 0 0 9px rgba(178,141,75,0); } }
   #ytp{ position:fixed; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
 
+  /* летящие голуби */
+  .dove{ position:fixed; top:0; left:0; width:clamp(30px,8vw,50px); color:#fdfaf0; pointer-events:none; z-index:55;
+    filter:drop-shadow(0 3px 5px rgba(120,95,40,.35)); }
+  .dove svg{ width:100%; display:block; transform-origin:center; animation:flap .5s ease-in-out infinite; }
+  @keyframes flap{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(.62); } }
+  @keyframes fly1{ 0%{ transform:translate(-18vw,12vh) rotate(-5deg); opacity:0; } 8%{opacity:.95} 92%{opacity:.95} 100%{ transform:translate(118vw,7vh) rotate(4deg); opacity:0; } }
+  @keyframes fly2{ 0%{ transform:translate(118vw,28vh) rotate(4deg); opacity:0; } 10%{opacity:.9} 90%{opacity:.9} 100%{ transform:translate(-18vw,20vh) rotate(-4deg); opacity:0; } }
+  .dove.d1{ animation:fly1 18s linear infinite; }
+  .dove.d2{ animation:fly2 26s linear infinite; animation-delay:7s; width:clamp(24px,6vw,40px); opacity:.85; }
+
+  .hostlink{ display:inline-flex; align-items:center; gap:.4rem; margin-top:1.4rem; text-decoration:none;
+    color:var(--gold-d); font-size:var(--fs-sm); letter-spacing:.08em; border:1px solid var(--line); border-radius:999px; padding:.55rem 1.1rem; }
+
   section{ padding:clamp(2.5rem,8vw,4.5rem) 1.25rem; display:flex; justify-content:center; }
 
   /* ─── HERO ─── */
@@ -113,7 +126,7 @@
   .rise{ opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
   .rise.vis{ opacity:1; transform:none; }
   @keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
-  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .rise{ opacity:1; transform:none; transition:none; } .scrollcue svg{ animation:none; } }
+  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .rise{ opacity:1; transform:none; transition:none; } .scrollcue svg{ animation:none; } .dove{ display:none; } }
 </style>
 </head>
 <body>
@@ -136,6 +149,8 @@
     <button id="ru" type="button">Рус</button>
   </div>
   <button class="music pulse" id="music" type="button" aria-label="Музыка"></button>
+  <div class="dove d1" aria-hidden="true"><svg viewBox="0 0 64 34" fill="currentColor" stroke="#caa968" stroke-width=".6"><path d="M2 24 C16 22 24 15 31 5 C33 14 39 19 50 18 C43 23 35 24 30 22 C36 27 45 28 58 25 C47 32 34 33 25 30 C17 27 8 27 2 24 Z"/></svg></div>
+  <div class="dove d2" aria-hidden="true"><svg viewBox="0 0 64 34" fill="currentColor" stroke="#caa968" stroke-width=".6"><path d="M2 24 C16 22 24 15 31 5 C33 14 39 19 50 18 C43 23 35 24 30 22 C36 27 45 28 58 25 C47 32 34 33 25 30 C17 27 8 27 2 24 Z"/></svg></div>
   <div id="ytp"></div>
 
 <main>
@@ -230,6 +245,7 @@
   <footer>
     <div class="fn">Акназар &amp; Медина</div>
     <div class="fd">22.08.2026</div>
+    <a class="hostlink" id="hostlink" href="create/" style="display:none">✎ Чакыруу шилтемесин түзүү</a>
   </footer>
 </main>
 
@@ -326,6 +342,9 @@
   var saved = (urlLang==='ky'||urlLang==='ru') ? urlLang : 'ru';
   if(!(urlLang==='ky'||urlLang==='ru')){ try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){} }
   applyLang(saved);
+
+  /* ссылка на генератор видна только владельцу (в ссылке нет имени гостя) */
+  if(!GUEST){ document.getElementById('hostlink').style.display='inline-flex'; }
 
   /* ───── музыка (YouTube, тихо) ───── */
   var ICON_ON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 010 7M18.5 6a7 7 0 010 12"/></svg>';
