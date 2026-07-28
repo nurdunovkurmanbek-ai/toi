@@ -46,12 +46,6 @@
   @keyframes mpulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(169,131,74,.45); } 50%{ box-shadow:0 0 0 9px rgba(169,131,74,0); } }
   #ytp{ position:fixed; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
 
-  .hostlink{ position:fixed; right:.9rem; bottom:.9rem; z-index:60; display:none; align-items:center; gap:.4rem;
-    background:rgba(253,253,251,.92); backdrop-filter:blur(6px); border:1px solid var(--line); border-radius:999px;
-    padding:.45rem .8rem; text-decoration:none; color:var(--gold); font-family:var(--serif);
-    font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; box-shadow:0 6px 18px -10px rgba(80,60,20,.5); }
-  .hostlink svg{ width:16px; height:16px; }
-
   section{ padding:clamp(2.5rem,8vw,4.5rem) 1.15rem; display:flex; justify-content:center; }
   .hero{ padding-top:clamp(2rem,7vw,4rem); position:relative; }
   .peony{ position:absolute; z-index:3; pointer-events:none; filter:drop-shadow(0 10px 16px rgba(90,80,60,.16)); }
@@ -154,10 +148,6 @@
   </div>
 
   <button class="music pulse" id="music" type="button" aria-label="Музыка"></button>
-  <a class="hostlink" id="hostlink" href="create/" aria-label="Создать ссылку">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg>
-    Шилтеме
-  </a>
   <div id="ytp"></div>
 
 <main>
@@ -350,9 +340,6 @@
   var saved = (urlLang==='ky'||urlLang==='ru') ? urlLang : 'ru';
   if(!(urlLang==='ky'||urlLang==='ru')){ try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){} }
   applyLang(saved);
-
-  /* кнопка «Шилтеме» видна только владельцу (когда в ссылке нет имени гостя) */
-  if(!GUEST){ document.getElementById('hostlink').style.display='inline-flex'; }
 
   /* ───── музыка (YouTube, тихо) ───── */
   var ICON_ON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 010 7M18.5 6a7 7 0 010 12"/></svg>';
