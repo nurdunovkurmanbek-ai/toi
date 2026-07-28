@@ -62,9 +62,6 @@
   .dove.d1{ animation:fly1 18s linear infinite; }
   .dove.d2{ animation:fly2 26s linear infinite; animation-delay:7s; width:clamp(24px,6vw,40px); opacity:.85; }
 
-  .hostlink{ display:inline-flex; align-items:center; gap:.4rem; margin-top:1.4rem; text-decoration:none;
-    color:var(--gold-d); font-size:var(--fs-sm); letter-spacing:.08em; border:1px solid var(--line); border-radius:999px; padding:.55rem 1.1rem; }
-
   section{ padding:clamp(2.5rem,8vw,4.5rem) 1.25rem; display:flex; justify-content:center; }
 
   /* ─── HERO ─── */
@@ -245,7 +242,6 @@
   <footer>
     <div class="fn">Акназар &amp; Медина</div>
     <div class="fd">22.08.2026</div>
-    <a class="hostlink" id="hostlink" href="create/" style="display:none">✎ Чакыруу шилтемесин түзүү</a>
   </footer>
 </main>
 
@@ -342,9 +338,6 @@
   var saved = (urlLang==='ky'||urlLang==='ru') ? urlLang : 'ru';
   if(!(urlLang==='ky'||urlLang==='ru')){ try{ saved=localStorage.getItem('lang')||'ru'; }catch(e){} }
   applyLang(saved);
-
-  /* ссылка на генератор видна только владельцу (в ссылке нет имени гостя) */
-  if(!GUEST){ document.getElementById('hostlink').style.display='inline-flex'; }
 
   /* ───── музыка (YouTube, тихо) ───── */
   var ICON_ON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 010 7M18.5 6a7 7 0 010 12"/></svg>';
